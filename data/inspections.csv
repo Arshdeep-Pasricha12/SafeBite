@@ -1,0 +1,15 @@
+InspectionID,RestaurantID,InspectorID,InspectionDate,InspectionType,DurationMinutes,TotalScore,PassFailStatus,RiskLevel,InspectorNotes
+INS001,R0001,1,2024-03-15,Routine,90,85,Passed with Violations,Medium,Food temperature issues noted in cold storage
+INS002,R0001,2,2024-01-10,Follow-up,60,88,Passed,Low,Previous violations corrected
+INS003,R0002,1,2024-03-10,Routine,75,92,Passed,Low,Excellent food safety practices
+INS004,R0003,3,2024-02-28,Routine,105,78,Passed with Violations,Medium,Multiple storage violations found
+INS005,R0003,1,2023-12-15,Follow-up,45,82,Passed,Low,Improvements noted
+INS006,R0004,2,2024-03-12,Routine,80,88,Passed,Low,Good overall compliance
+INS007,R0005,3,2024-03-08,Routine,70,91,Passed,Low,Exemplary kitchen practices
+INS008,R0006,1,2024-02-25,Complaint-based,120,79,Passed with Violations,High,Multiple critical violations
+INS009,R0006,2,2024-01-05,Follow-up,90,75,Failed,High,Previous violations not corrected
+INS010,R0007,3,2024-03-14,Routine,85,86,Passed,Low,Minor temperature issue resolved
+INS011,R0008,1,2024-03-11,Routine,65,93,Passed,Low,Outstanding food safety record
+INS012,R0009,2,2024-03-05,Routine,95,82,Passed with Violations,Medium,Labeling violations noted
+INS013,R0010,3,2024-02-20,Routine,110,75,Failed,Critical,Multiple critical violations found
+INS014,R0010,1,2024-01-15,Follow-up,125,70,Failed,Critical,Serious ongoing violations

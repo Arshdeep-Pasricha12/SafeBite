@@ -1,0 +1,18 @@
+ViolationID,InspectionID,ViolationCode,Category,Description,Location,Severity,PointsDeducted,CorrectedOnSite,HealthRiskLevel
+V001,INS001,3-501.16,Temperature Control,Food temperature not maintained at safe levels,Cold Storage,Major,5,False,High
+V002,INS001,4-601.11,Cleanliness,Food contact surfaces not properly sanitized,Kitchen,Minor,2,True,Medium
+V003,INS003,None,None,No violations found,N/A,None,0,True,None
+V004,INS004,3-304.14,Food Storage,Raw meat stored above ready-to-eat foods,Walk-in Cooler,Major,4,False,High
+V005,INS004,2-303.11,Personnel,Food handler not wearing hair restraint,Kitchen,Minor,1,True,Low
+V006,INS004,6-501.12,Pest Control,Evidence of pest activity in storage area,Storage,Major,3,False,Medium
+V007,INS008,2-102.11,Hand Washing,Employee failed to wash hands after handling raw meat,Prep Area,Critical,7,False,High
+V008,INS008,3-301.11,Food Source,Food from unapproved supplier found,Storage,Critical,10,False,High
+V009,INS008,4-204.112,Equipment,Dishwasher not reaching proper temperature,Dish Area,Major,3,False,Medium
+V010,INS009,2-102.11,Hand Washing,Handwashing station not accessible,Kitchen,Critical,7,False,High
+V011,INS009,3-501.16,Temperature Control,Multiple foods in temperature danger zone,Kitchen,Critical,8,False,High
+V012,INS012,3-202.15,Food Labeling,Food containers not properly labeled with dates,Storage,Minor,2,True,Low
+V013,INS013,2-102.11,Hand Washing,No soap at handwashing station,Kitchen,Critical,10,False,High
+V014,INS013,3-501.16,Temperature Control,Refrigerator temperature above 45°F,Kitchen,Critical,8,False,High
+V015,INS013,6-501.12,Pest Control,Live roaches observed in kitchen,Kitchen,Critical,10,False,High
+V016,INS014,2-102.11,Hand Washing,Handwashing violations continue,Kitchen,Critical,10,False,High
+V017,INS014,3-501.16,Temperature Control,Temperature violations not corrected,Kitchen,Critical,8,False,High

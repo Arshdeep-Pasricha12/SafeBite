@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./data:/app/data
+      - ./database:/app/database
+    environment:
+      - DATABASE_URL=sqlite:///database/safebite.db
+    depends_on:
+      - database-setup
+    networks:
+      - safebite-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - safebite-network
+
+  database-setup:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/app/data
+      - ./database:/app/database
+      - ./create_database_from_csv.py:/app/create_database_from_csv.py
+    command: python /app/create_database_from_csv.py
+    networks:
+      - safebite-network
+
+networks:
+  safebite-network:
+    driver: bridge

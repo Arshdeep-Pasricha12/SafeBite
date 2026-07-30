@@ -1,0 +1,10 @@
+Code,Category,Description,Severity,PointsDeducted,HealthRiskLevel,TypicalCorrectiveAction
+2-102.11,Hand Washing,Food employees must wash hands and exposed arms,Critical,7,High,Retrain staff on proper handwashing procedures
+3-301.11,Food Source,Food must be from approved sources,Critical,10,High,Remove unapproved food sources and verify supplier credentials
+3-501.16,Temperature Control,Potentially hazardous food must be at proper holding temperature,Critical,8,High,Adjust refrigeration equipment and monitor temperatures
+4-601.11,Cleanliness,Food contact surfaces must be clean and sanitized,Major,3,Medium,Clean and sanitize all food contact surfaces immediately
+2-303.11,Personnel,Food employees must wear proper hair restraints,Minor,1,Low,Provide proper hair nets and training to staff
+6-501.12,Pest Control,Premises must be maintained free of insects and rodents,Major,5,Medium,Implement pest control program and seal entry points
+3-304.14,Food Storage,Raw animal foods must be stored separately from ready-to-eat foods,Major,4,High,Reorganize storage to prevent cross-contamination
+4-204.112,Equipment,Manual warewashing equipment must be properly maintained,Major,3,Medium,Repair and maintain dishwashing equipment
+3-202.15,Food Labeling,Food containers must be properly labeled with dates,Minor,2,Low,Label all food containers with preparation and discard dates

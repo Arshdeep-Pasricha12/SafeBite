@@ -1,0 +1,4 @@
+InspectorID,Name,BadgeNumber,CertificationLevel,Department,ContactEmail,Active
+1,Dr. Sarah Chen,INS-001,Senior,Austin Health Department,sarah.chen@austinhealth.gov,True
+2,Michael Rodriguez,INS-002,Lead,Austin Health Department,michael.rodriguez@austinhealth.gov,True
+3,Jennifer Park,INS-003,Senior,Austin Health Department,jennifer.park@austinhealth.gov,True

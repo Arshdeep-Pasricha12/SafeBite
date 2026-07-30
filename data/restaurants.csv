@@ -1,0 +1,11 @@
+RestaurantID,RestaurantName,Cuisine,Address,City,State,Phone,Email,OwnerName,LicenseNumber,LicenseStatus,RestaurantStatus,SafetyScore,SafetyRating,LastInspectionDate,InspectionResult,InspectionScore,PreviousViolations,LatestViolation,ViolationSeverity,ComplaintCount,LatestComplaint,ComplaintStatus
+R0001,Sakura Sushi Bar,Japanese,123 Main Street,Austin,Texas,555-0101,owner1@safebite.demo,Takeshi Yamamoto,LIC-123456,Active,Open,85,Good,2024-03-15,Passed with Violations,85,2,Food temperature not maintained properly,Major,0,,
+R0002,Milano Pizza House,Italian,456 Oak Avenue,Austin,Texas,555-0102,owner2@safebite.demo,Giuseppe Romano,LIC-123457,Active,Open,92,Excellent,2024-03-10,Passed,92,0,,,1,Customer complaint about service quality,Under Investigation
+R0003,Spice Palace,Indian,789 Cedar Lane,Austin,Texas,555-0103,owner3@safebite.demo,Priya Sharma,LIC-123458,Active,Open,78,Good,2024-02-28,Passed with Violations,78,3,Improper food storage,Minor,2,Food appeared stale,Resolved
+R0004,Dragon Garden,Chinese,321 Elm Street,Austin,Texas,555-0104,owner4@safebite.demo,Wei Chen,LIC-123459,Active,Open,88,Good,2024-03-12,Passed,88,1,Kitchen sanitation issue,Major,0,,
+R0005,Taco Fiesta,Mexican,654 Pine Road,Austin,Texas,555-0105,owner5@safebite.demo,Carlos Rodriguez,LIC-123460,Active,Open,91,Excellent,2024-03-08,Passed,91,0,,,0,,
+R0006,Le Petit Bistro,French,987 Maple Drive,Austin,Texas,555-0106,owner6@safebite.demo,Marie Dubois,LIC-123461,Active,Open,79,Fair,2024-02-25,Passed with Violations,79,4,Staff hygiene concerns,Critical,1,Found hair in food,Under Investigation
+R0007,Bangkok Express,Thai,147 Birch Street,Austin,Texas,555-0107,owner7@safebite.demo,Somchai Tanaka,LIC-123462,Active,Open,86,Good,2024-03-14,Passed,86,1,Temperature violation,Minor,0,,
+R0008,Greek Corner,Greek,258 Willow Lane,Austin,Texas,555-0108,owner8@safebite.demo,Dimitris Stavros,LIC-123463,Active,Open,93,Excellent,2024-03-11,Passed,93,0,,,0,,
+R0009,Seoul Kitchen,Korean,369 Walnut Ave,Austin,Texas,555-0109,owner9@safebite.demo,Min-jun Park,LIC-123464,Active,Open,82,Good,2024-03-05,Passed with Violations,82,2,Food labeling issue,Minor,0,,
+R0010,Burger Junction,American,741 Cherry Street,Austin,Texas,555-0110,owner10@safebite.demo,Mike Johnson,LIC-123465,Active,Open,75,Fair,2024-02-20,Failed,75,5,Critical temperature violations,Critical,3,Food poisoning suspected,Verified
