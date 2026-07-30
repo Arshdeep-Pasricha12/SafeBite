@@ -46,9 +46,10 @@ ENV/
 env/
 
 # Database files
-*.db
-*.sqlite
-*.sqlite3
+# (We are committing the SQLite DB directly)
+# *.db
+# *.sqlite
+# *.sqlite3
 
 # Logs
 logs/
@@ -142,8 +143,7 @@ temp/
 ehthumbs.db
 Thumbs.db
 
-# Docker
-.dockerignore
+# Docker - keep .dockerignore files committed, only ignore local overrides
 
 # Jupyter Notebook
 .ipynb_checkpoints

@@ -1,0 +1,16 @@
+# Backend .dockerignore
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.venv/
+venv/
+env/
+*.db
+*.sqlite
+*.sqlite3
+.git/
+.gitignore
+*.log

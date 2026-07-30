@@ -2,19 +2,23 @@ version: '3.8'
 
 services:
   backend:
-    build: 
+    build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
       - ./backend:/app
-      - ./data:/app/data
       - ./database:/app/database
     environment:
       - DATABASE_URL=sqlite:///database/safebite.db
-    depends_on:
-      - database-setup
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
     networks:
       - safebite-network
 
@@ -28,19 +32,8 @@ services:
       - ./frontend:/app
       - /app/node_modules
     depends_on:
-      - backend
-    networks:
-      - safebite-network
-
-  database-setup:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    volumes:
-      - ./data:/app/data
-      - ./database:/app/database
-      - ./create_database_from_csv.py:/app/create_database_from_csv.py
-    command: python /app/create_database_from_csv.py
+      backend:
+        condition: service_healthy
     networks:
       - safebite-network
 

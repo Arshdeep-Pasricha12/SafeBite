@@ -73,33 +73,18 @@ A comprehensive platform for discovering restaurants with verified food safety s
 - Docker Desktop
 - Git
 
-### Docker Development (Recommended)
+### Docker Development (Recommended & Easiest)
+Make sure Docker Desktop is installed and running, then simply run:
 ```bash
-git clone [your-repo-url]
-cd safebite
 docker-compose up --build
 ```
 
 **Access:**
 - Frontend: http://localhost:3001
 - Backend API: http://localhost:8000
-- API Documentation: http://localhost:8000/docs
+- API Documentation (Swagger): http://localhost:8000/docs
 
-### Manual Setup
-```bash
-# Database setup
-python create_database_from_csv.py
-
-# Backend (Terminal 1)
-cd backend
-pip install -r requirements.txt
-python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-
-# Frontend (Terminal 2)  
-cd frontend
-npm install
-npm run dev
-```
+*(Note: The database is pre-populated with 1,000 Indian restaurants and comes bundled in the `database/` folder. No extra setup is required!)*
 
 ## 🏗️ Architecture
 
