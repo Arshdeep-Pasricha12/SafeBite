@@ -2,215 +2,172 @@
 
 A comprehensive platform for discovering restaurants with verified food safety standards and transparent inspection histories.
 
-## 📋 Vision Document
+## 📋 1. Vision Document
 
 ### Project Name & Overview
-**SafeBite** is a restaurant discovery platform that prioritizes food safety transparency, helping customers make informed dining decisions based on comprehensive inspection histories, safety scores, and violation records from health department data.
+**SafeBite** is a restaurant discovery platform that prioritizes food safety transparency, helping customers make informed dining decisions based on comprehensive inspection histories, safety scores, and violation records from FSSAI health department data.
 
 ### Problem it Solves
-- **Lack of Food Safety Transparency**: Customers have no easy way to access restaurant inspection histories
-- **Hidden Violation Records**: Critical health violations are buried in government databases
-- **Uninformed Dining Decisions**: People can't easily assess food safety risks before visiting restaurants  
-- **Scattered Safety Information**: Inspection data, violation codes, and corrective actions are not centralized
+- **Lack of Food Safety Transparency**: Customers have no easy access to inspection histories
+- **Hidden Violation Records**: Critical health violations buried in government databases
+- **Uninformed Dining Decisions**: People cannot assess food safety risks before visiting
+- **Scattered Safety Information**: Inspection data and violation codes are not centralized
 
 ### Target Users (Personas)
-
-#### 1. **Sarah - Health-Conscious Customer** 
-- **Age**: 32, Marketing Manager
-- **Values**: Food safety, family health
-- **Goals**: Find restaurants with excellent safety records for family dining
-- **Pain Points**: Can't easily access inspection histories, worried about food poisoning
-
-#### 2. **Mike - Restaurant Owner**
-- **Age**: 45, Small Business Owner  
-- **Values**: Reputation, customer trust
-- **Goals**: Showcase excellent safety practices, improve visibility
-- **Pain Points**: Potential customers don't see safety improvements, negative reviews overshadow safety efforts
-
-#### 3. **Lisa - Health Inspector**
-- **Age**: 38, City Health Department
-- **Values**: Public health, regulatory compliance
-- **Goals**: Ensure restaurants maintain safety standards, track improvement
-- **Pain Points**: Limited public visibility of inspection data, hard to track trends
+| Persona | Role / Age | Goal | Pain Point |
+|---------|------------|------|------------|
+| **Sarah** | Health-Conscious Customer, 32 | Find restaurants with excellent safety records for family dining | Cannot easily access inspection histories |
+| **Mike** | Restaurant Owner, 45 | Showcase excellent safety practices and improve visibility | Customers do not see safety improvements |
+| **Lisa** | Health Inspector, 38 | Ensure restaurants maintain safety standards | Limited public visibility of inspection data |
 
 ### Vision Statement
-**"To create a transparent ecosystem where food safety information is accessible, empowering customers to make informed dining decisions while helping restaurants showcase their commitment to health standards."**
+*"To create a transparent ecosystem where food safety information is accessible, empowering customers to make informed dining decisions while helping restaurants showcase their commitment to health standards."*
 
 ### Key Features / Goals
 1. **Comprehensive Inspection History** - Complete timeline of all inspections with violation details
-2. **Real-time Safety Scores** - 0-100 safety ratings based on latest inspections  
-3. **Violation Transparency** - Detailed FDA violation codes with corrective actions
+2. **Real-time Safety Scores** - 0-100 safety ratings based on latest FSSAI inspections
+3. **Violation Transparency** - Detailed FSSAI violation codes with corrective actions
 4. **Inspector Credibility** - Health inspector profiles with credentials and experience
-5. **Restaurant Discovery** - Advanced filtering by safety scores, cuisine, location
+5. **Restaurant Discovery** - Advanced filtering by safety scores, cuisine, and location
 6. **Admin Approval Workflow** - Quality control for restaurant listings
 7. **Mobile-Responsive Design** - Accessible on all devices
 
 ### Success Metrics
-- **User Engagement**: 80%+ of users check inspection history before restaurant visits
-- **Data Accuracy**: 95%+ accuracy in safety score calculations
-- **Restaurant Adoption**: 500+ restaurants onboarded in first 6 months  
-- **Customer Trust**: 4.5+ star average app rating
-- **Health Impact**: 20% reduction in food poisoning reports in coverage areas
-
-### Assumptions & Constraints
-**Assumptions:**
-- Health department inspection data is publicly available
-- Restaurants will voluntarily participate for transparency benefits
-- Customers value safety information when choosing restaurants
-- Mobile-first usage patterns for restaurant discovery
-
-**Constraints:**
-- Limited to publicly available inspection data
-- Dependent on health department data accuracy and timeliness
-- Must comply with data privacy and health information regulations
-- Initial MVP budget of $50,000 for development and infrastructure
-
-## 🚀 Quick Start - Local Development
-
-### Prerequisites
-- Python 3.12+
-- Node.js 18+
-- Docker Desktop
-- Git
-
-### Docker Development (Recommended & Easiest)
-Make sure Docker Desktop is installed and running, then simply run:
-```bash
-docker-compose up --build
-```
-
-**Access:**
-- Frontend: http://localhost:3001
-- Backend API: http://localhost:8000
-- API Documentation (Swagger): http://localhost:8000/docs
-
-*(Note: The database is pre-populated with 1,000 Indian restaurants and comes bundled in the `database/` folder. No extra setup is required!)*
-
-## 🏗️ Architecture
-
-SafeBite follows a modern web architecture with clear separation of concerns:
-
-**Frontend (React)** → **Backend (FastAPI)** → **Database (SQLite)** → **Deployment (Docker)**
-
-Data flows from CSV source files → SQLite database → FastAPI endpoints → React components → User interface
-
-## 🛠️ Tech Stack
-
-### Frontend
-- **Framework**: React 18 with Vite
-- **Styling**: Tailwind CSS
-- **Routing**: React Router v6
-- **HTTP Client**: Axios
-- **State Management**: React Context API
-
-### Backend  
-- **Framework**: FastAPI (Python 3.12)
-- **Database**: SQLite with SQLAlchemy ORM
-- **Authentication**: JWT tokens with bcrypt
-- **Validation**: Pydantic schemas
-- **Server**: Uvicorn ASGI
-
-### DevOps
-- **Containerization**: Docker & Docker Compose
-- **Database**: CSV-based data seeding
-- **Development**: Hot reload for both frontend/backend
-
-## 📂 Project Structure
-
-```
-safebite/
-├── frontend/                 # React application
-│   ├── src/
-│   │   ├── components/      # Reusable UI components
-│   │   ├── pages/           # Page components  
-│   │   ├── services/        # API integration
-│   │   └── context/         # Authentication context
-│   ├── Dockerfile
-│   └── package.json
-├── backend/                  # FastAPI application
-│   ├── app/
-│   │   ├── api/            # API endpoints
-│   │   ├── core/           # Configuration & database
-│   │   ├── models/         # SQLAlchemy models
-│   │   └── schemas/        # Pydantic schemas
-│   ├── Dockerfile
-│   └── requirements.txt
-├── data/                    # CSV source files (single source of truth)
-│   ├── restaurants.csv
-│   ├── inspections.csv
-│   ├── violations.csv
-│   └── inspectors.csv
-├── database/               # Generated SQLite database
-├── docs/                   # Documentation
-├── docker-compose.yml      # Multi-container setup
-└── README.md
-```
-
-## 🔄 Branching Strategy (GitHub Flow)
-
-We follow **GitHub Flow** for simple, continuous deployment:
-
-1. **main** branch - Production-ready code
-2. **feature/[feature-name]** - Feature development branches
-3. **bugfix/[bug-description]** - Bug fix branches
-
-### Workflow:
-```bash
-# Create feature branch
-git checkout -b feature/inspection-timeline
-git push -u origin feature/inspection-timeline
-
-# Make changes, commit, push
-git add .
-git commit -m "Add inspection timeline component"
-git push origin feature/inspection-timeline
-
-# Create Pull Request → Review → Merge to main
-```
-
-## 🧪 Demo Accounts
-
-- **Admin**: admin@safebite.demo / password123
-- **Customer**: customer@safebite.demo / password123  
-- **Restaurant Owner**: owner1@safebite.demo / password123
-
-## 📖 Documentation
-
-- [Complete Project Guide](CENTRALIZED_PROJECT_GUIDE.md) - Detailed technical documentation
-- [API Documentation](docs/API_DOCUMENTATION.md) - REST API reference
-- [Deployment Guide](docs/DEPLOYMENT_GUIDE.md) - Production deployment
-
-## 🐳 Local Development Tools
-
-### Required Tools
-- **Docker Desktop**: Container orchestration
-- **Visual Studio Code**: Primary IDE with extensions:
-  - Docker Extension
-  - Python Extension  
-  - ES7+ React/Redux/React-Native snippets
-  - Tailwind CSS IntelliSense
-- **Postman/Insomnia**: API testing
-- **Git**: Version control
-
-### Development Workflow
-1. Clone repository
-2. Run `docker-compose up --build` for full stack
-3. Make changes with hot reload enabled
-4. Test endpoints via Swagger UI (localhost:8000/docs)
-5. Commit to feature branch and create PR
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+| Metric | Target |
+|--------|--------|
+| **User Engagement** | 80%+ of users check inspection history before restaurant visits |
+| **Data Accuracy** | 95%+ accuracy in safety score calculations |
+| **Restaurant Adoption** | 500+ restaurants onboarded in first 6 months |
+| **Customer Trust** | 4.5+ star average app rating |
+| **Health Impact** | 20% reduction in food poisoning reports in coverage areas |
 
 ---
 
-**SafeBite** - *Making food safety transparent, one inspection at a time.* 🛡️🍽️
+## 📝 2. User Stories (25 GitHub Issues)
+
+All 25 user stories have been tracked in the GitHub Issues section of this repository. They are grouped into 7 main Epics:
+1. **Epic 1: Authentication & Management** (3 Stories)
+2. **Epic 2: Restaurant Search & Discovery** (4 Stories)
+3. **Epic 3: Food Safety & Inspection History** (5 Stories)
+4. **Epic 4: Restaurant Owner Management** (4 Stories)
+5. **Epic 5: Admin Management** (4 Stories)
+6. **Epic 6: User Experience** (3 Stories)
+7. **Epic 7: Data Management** (2 Stories)
+
+---
+
+## 🎯 3. MoSCoW Prioritization
+
+### Must Have (Critical for MVP)
+- Story 1 - User Registration
+- Story 2 - User Login
+- Story 4 - Browse Restaurant Listings
+- Story 7 - View Restaurant Details
+- Story 8 - View Safety Score
+- Story 9 - View Inspection History Timeline
+- Story 13 - Create Restaurant Listing
+- Story 17 - Review Pending Applications
+- Story 18 - Approve Restaurant Listings
+- Story 21 - Responsive Mobile Design
+- Story 24 - CSV Data Import System
+
+### Should Have (Important for User Experience)
+- Story 3 - Role-Based Access Control
+- Story 5 - Filter Restaurants by Criteria
+- Story 6 - Search Restaurants by Name
+- Story 10 - View Inspection Violation Details
+- Story 14 - Edit Restaurant Information
+- Story 15 - View Listing Approval Status
+- Story 19 - Reject Restaurant Listings
+- Story 22 - Navigation and Site Structure
+- Story 23 - Loading States & Performance
+
+### Could Have (Nice to Have Features)
+- Story 11 - View Inspector Information
+- Story 12 - View Violation Photos
+- Story 16 - Manage Multiple Locations
+- Story 20 - Manage Users
+- Story 25 - Data Synchronization with Health Departments
+
+### Won't Have (Future Releases)
+- Advanced Analytics Dashboard
+- Live Notifications
+- Mobile Application
+- Customer Review System
+
+---
+
+## 🎨 Figma Wireframes
+[View Figma Wireframes Here](https://www.figma.com/design/bKqw8mWVk8IHUb1oXcNMG2/Untitled?node-id=0-1&p=f&t=ayZDpOpgXNiVLV9q-0)
+
+Includes screens for:
+1. Login / Sign Up
+2. Home Page
+3. Restaurant Details
+4. Owner Dashboard
+5. Admin Dashboard
+
+---
+
+## 🏗️ 4. Architecture
+
+SafeBite follows a modern web architecture:
+**Frontend (React)** → **Backend (FastAPI)** → **Database (SQLite)** → **Deployment (Docker)**
+
+### Tech Stack
+| Layer | Technology | Port |
+|-------|------------|------|
+| **Frontend** | React 18, Vite, Tailwind CSS, Axios | 3001 |
+| **Backend** | FastAPI, Python 3.12, Uvicorn, JWT | 8000 |
+| **Database** | SQLite, SQLAlchemy ORM | - |
+| **DevOps** | Docker, Docker Compose | - |
+
+---
+
+## 🚀 5. Development Setup & Quick Start
+
+### Folder Structure
+```text
+safebite/
+├── frontend/                 # React 18 + Vite + Tailwind CSS
+│   ├── src/
+│   ├── Dockerfile
+│   └── package.json
+├── backend/                  # FastAPI + Python 3.12
+│   ├── app/
+│   ├── Dockerfile
+│   └── requirements.txt
+├── database/                 # Contains pre-seeded SQLite database
+│   └── safebite.db           # 1,000+ Indian restaurants pre-loaded
+├── docs/                     # Documentation
+├── .gitignore                # Rules for version control
+├── docker-compose.yml        # Docker orchestration
+└── README.md
+```
+
+### Run Locally (Docker)
+Ensure **Docker Desktop** is installed and running.
+
+```bash
+git clone https://github.com/rudransh27sharma/SafeBite.git
+cd SafeBite
+docker-compose up --build
+```
+
+**Access URLs:**
+- **Frontend App:** http://localhost:3001
+- **Backend API Docs (Swagger):** http://localhost:8000/docs
+
+*Note: The SQLite database comes fully pre-seeded out of the box.*
+
+### Branching Strategy (GitHub Flow)
+1. **main** - Production-ready code
+2. **feature/[name]** - Short-lived feature branches (e.g., `feature/docker-setup`)
+3. Open a Pull Request → Review → Squash & Merge
+
+---
+
+## 🔑 Demo Accounts
+- **Admin**: admin@safebite.demo / password123
+- **Customer**: customer@safebite.demo / password123  
+- **Restaurant Owner**: owner1@safebite.demo / password123
