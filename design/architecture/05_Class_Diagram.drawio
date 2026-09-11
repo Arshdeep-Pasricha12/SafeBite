@@ -1,0 +1,150 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Class Diagram" id="class-diagram">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1050" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- User -->
+        <mxCell id="cl_user" value="User" style="swimlane;html=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="40" y="40" width="220" height="180" as="geometry"/></mxCell>
+        <mxCell id="u_a1" value="- id: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_user"><mxGeometry y="0" width="220" height="18" as="geometry"/></mxCell>
+        <mxCell id="u_a2" value="- email: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_user"><mxGeometry y="18" width="220" height="18" as="geometry"/></mxCell>
+        <mxCell id="u_a3" value="- password_hash: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_user"><mxGeometry y="36" width="220" height="18" as="geometry"/></mxCell>
+        <mxCell id="u_a4" value="- full_name: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_user"><mxGeometry y="54" width="220" height="18" as="geometry"/></mxCell>
+        <mxCell id="u_a5" value="- role: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_user"><mxGeometry y="72" width="220" height="18" as="geometry"/></mxCell>
+        <mxCell id="u_a6" value="- created_at: datetime" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_user"><mxGeometry y="90" width="220" height="18" as="geometry"/></mxCell>
+        <mxCell id="u_sep" value="" style="line;html=1;strokeWidth=1;" vertex="1" parent="cl_user"><mxGeometry y="108" width="220" height="8" as="geometry"/></mxCell>
+        <mxCell id="u_m1" value="+ restaurants: List~Restaurant~" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_user"><mxGeometry y="116" width="220" height="18" as="geometry"/></mxCell>
+
+        <!-- Restaurant -->
+        <mxCell id="cl_rest" value="Restaurant" style="swimlane;html=1;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="340" y="40" width="260" height="330" as="geometry"/></mxCell>
+        <mxCell id="r_a1" value="- id: str  (R0001...)" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="0" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a2" value="- name, cuisine, address: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="18" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a3" value="- city, state, phone, email: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="36" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a4" value="- license_number: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="54" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a5" value="- license_status: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="72" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a6" value="- restaurant_status: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="90" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a7" value="- safety_score: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="108" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a8" value="- safety_rating: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="126" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a9" value="- last_inspection_date: date" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="144" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a10" value="- inspection_result, inspection_score" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="162" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a11" value="- previous_violations: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="180" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a12" value="- complaint_count: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="198" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a13" value="- approval_status: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="216" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_a14" value="- owner_id: int (FK)" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="234" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_sep" value="" style="line;html=1;strokeWidth=1;" vertex="1" parent="cl_rest"><mxGeometry y="252" width="260" height="8" as="geometry"/></mxCell>
+        <mxCell id="r_m1" value="+ owner: User" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="260" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_m2" value="+ images: List~RestaurantImage~" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="278" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="r_m3" value="+ inspections, complaints: List" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_rest"><mxGeometry y="296" width="260" height="18" as="geometry"/></mxCell>
+
+        <!-- RestaurantImage -->
+        <mxCell id="cl_img" value="RestaurantImage" style="swimlane;html=1;startSize=26;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="660" y="40" width="220" height="100" as="geometry"/></mxCell>
+        <mxCell id="im_a1" value="- id: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_img"><mxGeometry y="0" width="220" height="18" as="geometry"/></mxCell>
+        <mxCell id="im_a2" value="- restaurant_id: str (FK)" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_img"><mxGeometry y="18" width="220" height="18" as="geometry"/></mxCell>
+        <mxCell id="im_a3" value="- image_url: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_img"><mxGeometry y="36" width="220" height="18" as="geometry"/></mxCell>
+        <mxCell id="im_a4" value="- is_primary: bool" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_img"><mxGeometry y="54" width="220" height="18" as="geometry"/></mxCell>
+
+        <!-- Inspector -->
+        <mxCell id="cl_insr" value="Inspector" style="swimlane;html=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="940" y="40" width="230" height="150" as="geometry"/></mxCell>
+        <mxCell id="in_a1" value="- id: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_insr"><mxGeometry y="0" width="230" height="18" as="geometry"/></mxCell>
+        <mxCell id="in_a2" value="- name: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_insr"><mxGeometry y="18" width="230" height="18" as="geometry"/></mxCell>
+        <mxCell id="in_a3" value="- badge_number: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_insr"><mxGeometry y="36" width="230" height="18" as="geometry"/></mxCell>
+        <mxCell id="in_a4" value="- certification_level: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_insr"><mxGeometry y="54" width="230" height="18" as="geometry"/></mxCell>
+        <mxCell id="in_a5" value="- department: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_insr"><mxGeometry y="72" width="230" height="18" as="geometry"/></mxCell>
+        <mxCell id="in_a6" value="- active: bool" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_insr"><mxGeometry y="90" width="230" height="18" as="geometry"/></mxCell>
+        <mxCell id="in_sep" value="" style="line;html=1;strokeWidth=1;" vertex="1" parent="cl_insr"><mxGeometry y="108" width="230" height="8" as="geometry"/></mxCell>
+        <mxCell id="in_m1" value="+ inspections: List~Inspection~" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_insr"><mxGeometry y="116" width="230" height="18" as="geometry"/></mxCell>
+
+        <!-- Inspection -->
+        <mxCell id="cl_ins" value="Inspection" style="swimlane;html=1;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="340" y="420" width="260" height="270" as="geometry"/></mxCell>
+        <mxCell id="is_a1" value="- id: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="0" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_a2" value="- restaurant_id: str (FK)" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="18" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_a3" value="- inspector_id: int (FK)" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="36" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_a4" value="- inspection_date: date" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="54" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_a5" value="- inspection_type: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="72" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_a6" value="- total_score: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="90" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_a7" value="- pass_fail_status: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="108" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_a8" value="- risk_level: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="126" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_a9" value="- permit_action: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="144" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_a10" value="- reinspection_required: bool" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="162" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_a11" value="- inspector_notes: text" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="180" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_sep" value="" style="line;html=1;strokeWidth=1;" vertex="1" parent="cl_ins"><mxGeometry y="198" width="260" height="8" as="geometry"/></mxCell>
+        <mxCell id="is_m1" value="+ restaurant: Restaurant" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="206" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_m2" value="+ inspector: Inspector" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="224" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="is_m3" value="+ violations, photos: List" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ins"><mxGeometry y="242" width="260" height="18" as="geometry"/></mxCell>
+
+        <!-- ViolationCode -->
+        <mxCell id="cl_vc" value="ViolationCode" style="swimlane;html=1;startSize=26;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="40" y="420" width="240" height="160" as="geometry"/></mxCell>
+        <mxCell id="vc_a1" value="- id: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vc"><mxGeometry y="0" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="vc_a2" value="- code: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vc"><mxGeometry y="18" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="vc_a3" value="- category: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vc"><mxGeometry y="36" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="vc_a4" value="- description: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vc"><mxGeometry y="54" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="vc_a5" value="- severity: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vc"><mxGeometry y="72" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="vc_a6" value="- points_deducted: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vc"><mxGeometry y="90" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="vc_a7" value="- health_risk_level: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vc"><mxGeometry y="108" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="vc_sep" value="" style="line;html=1;strokeWidth=1;" vertex="1" parent="cl_vc"><mxGeometry y="126" width="240" height="8" as="geometry"/></mxCell>
+        <mxCell id="vc_m1" value="+ violations: List~Violation~" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vc"><mxGeometry y="134" width="240" height="18" as="geometry"/></mxCell>
+
+        <!-- Violation -->
+        <mxCell id="cl_vio" value="Violation" style="swimlane;html=1;startSize=26;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="660" y="200" width="250" height="270" as="geometry"/></mxCell>
+        <mxCell id="vi_a1" value="- id: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="0" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_a2" value="- inspection_id: int (FK)" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="18" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_a3" value="- violation_code_id: int (FK)" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="36" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_a4" value="- description: text" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="54" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_a5" value="- location_in_restaurant: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="72" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_a6" value="- severity_level: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="90" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_a7" value="- points_deducted: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="108" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_a8" value="- corrected_on_site: bool" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="126" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_a9" value="- correction_deadline: date" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="144" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_a10" value="- verified_corrected: bool" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="162" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_a11" value="- repeat_violation: bool" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="180" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_sep" value="" style="line;html=1;strokeWidth=1;" vertex="1" parent="cl_vio"><mxGeometry y="198" width="250" height="8" as="geometry"/></mxCell>
+        <mxCell id="vi_m1" value="+ inspection: Inspection" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="206" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_m2" value="+ violation_code: ViolationCode" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="224" width="250" height="18" as="geometry"/></mxCell>
+        <mxCell id="vi_m3" value="+ photos: List~ViolationPhoto~" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vio"><mxGeometry y="242" width="250" height="18" as="geometry"/></mxCell>
+
+        <!-- InspectionPhoto -->
+        <mxCell id="cl_ip" value="InspectionPhoto" style="swimlane;html=1;startSize=26;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="40" y="640" width="240" height="120" as="geometry"/></mxCell>
+        <mxCell id="ip_a1" value="- id: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ip"><mxGeometry y="0" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="ip_a2" value="- inspection_id: int (FK)" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ip"><mxGeometry y="18" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="ip_a3" value="- photo_url: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ip"><mxGeometry y="36" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="ip_a4" value="- photo_type: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_ip"><mxGeometry y="54" width="240" height="18" as="geometry"/></mxCell>
+
+        <!-- ViolationPhoto -->
+        <mxCell id="cl_vp" value="ViolationPhoto" style="swimlane;html=1;startSize=26;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="960" y="500" width="240" height="120" as="geometry"/></mxCell>
+        <mxCell id="vp_a1" value="- id: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vp"><mxGeometry y="0" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="vp_a2" value="- violation_id: int (FK)" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vp"><mxGeometry y="18" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="vp_a3" value="- photo_url: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vp"><mxGeometry y="36" width="240" height="18" as="geometry"/></mxCell>
+        <mxCell id="vp_a4" value="- shows_before_after: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_vp"><mxGeometry y="54" width="240" height="18" as="geometry"/></mxCell>
+
+        <!-- Complaint -->
+        <mxCell id="cl_comp" value="Complaint" style="swimlane;html=1;startSize=26;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="660" y="700" width="260" height="230" as="geometry"/></mxCell>
+        <mxCell id="co_a1" value="- id: int" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_comp"><mxGeometry y="0" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="co_a2" value="- restaurant_id: str (FK)" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_comp"><mxGeometry y="18" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="co_a3" value="- complaint_type: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_comp"><mxGeometry y="36" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="co_a4" value="- description: text" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_comp"><mxGeometry y="54" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="co_a5" value="- status: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_comp"><mxGeometry y="72" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="co_a6" value="- priority_level: str" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_comp"><mxGeometry y="90" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="co_a7" value="- assigned_inspector_id: int (FK, nullable)" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_comp"><mxGeometry y="108" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="co_a8" value="- complaint_date: date" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_comp"><mxGeometry y="126" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="co_a9" value="- follow_up_inspection_required: bool" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_comp"><mxGeometry y="144" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="co_sep" value="" style="line;html=1;strokeWidth=1;" vertex="1" parent="cl_comp"><mxGeometry y="162" width="260" height="8" as="geometry"/></mxCell>
+        <mxCell id="co_m1" value="+ restaurant: Restaurant" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_comp"><mxGeometry y="170" width="260" height="18" as="geometry"/></mxCell>
+        <mxCell id="co_m2" value="+ assigned_inspector: Inspector" style="text;html=1;align=left;spacingLeft=6;fontSize=11;" vertex="1" parent="cl_comp"><mxGeometry y="188" width="260" height="18" as="geometry"/></mxCell>
+
+        <!-- RELATIONSHIPS -->
+        <mxCell id="rl1" value="1        *" style="html=1;endArrow=diamondThin;startArrow=none;endFill=1;fontSize=10;" edge="1" parent="1" source="cl_user" target="cl_rest"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="rl2" value="1        *" style="html=1;endArrow=diamondThin;startArrow=none;endFill=1;fontSize=10;" edge="1" parent="1" source="cl_rest" target="cl_img"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="rl3" value="1        *" style="html=1;endArrow=diamondThin;startArrow=none;endFill=1;fontSize=10;" edge="1" parent="1" source="cl_rest" target="cl_ins"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="rl4" value="1        *" style="html=1;endArrow=open;startArrow=none;fontSize=10;" edge="1" parent="1" source="cl_insr" target="cl_ins"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="rl5" value="1        *" style="html=1;endArrow=diamondThin;startArrow=none;endFill=1;fontSize=10;" edge="1" parent="1" source="cl_ins" target="cl_vio"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="rl6" value="1        *" style="html=1;endArrow=open;startArrow=none;fontSize=10;" edge="1" parent="1" source="cl_vc" target="cl_vio"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="rl7" value="1        *" style="html=1;endArrow=diamondThin;startArrow=none;endFill=1;fontSize=10;" edge="1" parent="1" source="cl_ins" target="cl_ip"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="rl8" value="1        *" style="html=1;endArrow=diamondThin;startArrow=none;endFill=1;fontSize=10;" edge="1" parent="1" source="cl_vio" target="cl_vp"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="rl9" value="1        *" style="html=1;endArrow=diamondThin;startArrow=none;endFill=1;fontSize=10;" edge="1" parent="1" source="cl_rest" target="cl_comp"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="rl10" value="0..1        *" style="html=1;endArrow=open;startArrow=none;dashed=1;fontSize=10;" edge="1" parent="1" source="cl_insr" target="cl_comp"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,72 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Use Case Diagram" id="uc-diagram">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- SYSTEM BOUNDARY -->
+        <mxCell id="sys" value="SafeBite Platform" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="260" y="40" width="820" height="640" as="geometry" />
+        </mxCell>
+
+        <!-- ACTORS -->
+        <mxCell id="act_guest" value="Guest" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1"><mxGeometry x="40" y="120" width="30" height="60" as="geometry"/></mxCell>
+        <mxCell id="act_cust" value="Customer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1"><mxGeometry x="40" y="280" width="30" height="60" as="geometry"/></mxCell>
+        <mxCell id="act_owner" value="Restaurant Owner" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1"><mxGeometry x="40" y="440" width="30" height="60" as="geometry"/></mxCell>
+        <mxCell id="act_admin" value="Administrator" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1"><mxGeometry x="1150" y="360" width="30" height="60" as="geometry"/></mxCell>
+        <mxCell id="act_reg" value="Registered User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1"><mxGeometry x="150" y="280" width="30" height="60" as="geometry"/></mxCell>
+
+        <!-- USE CASES -->
+        <mxCell id="uc_register" value="Register Account" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1"><mxGeometry x="300" y="80" width="160" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_login" value="Login" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1"><mxGeometry x="300" y="150" width="160" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_browse" value="Browse / Search /&#10;Filter Restaurants" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" vertex="1" parent="1"><mxGeometry x="300" y="220" width="160" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_detail" value="View Restaurant Details&#10;&amp; Safety Score" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" vertex="1" parent="1"><mxGeometry x="300" y="290" width="160" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_history" value="View Inspection History&#10;&amp; Violations" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" vertex="1" parent="1"><mxGeometry x="300" y="360" width="160" height="50" as="geometry"/></mxCell>
+
+        <mxCell id="uc_create" value="Create Restaurant Listing" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1"><mxGeometry x="560" y="420" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_update" value="Update Restaurant Listing" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1"><mxGeometry x="560" y="490" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_delete" value="Delete Restaurant Listing" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1"><mxGeometry x="560" y="560" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_ownview" value="View Own Restaurants&#10;Dashboard" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1"><mxGeometry x="560" y="630" width="180" height="50" as="geometry"/></mxCell>
+
+        <mxCell id="uc_pending" value="View Pending Restaurants" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;" vertex="1" parent="1"><mxGeometry x="840" y="420" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_approve" value="Approve Restaurant Listing" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;" vertex="1" parent="1"><mxGeometry x="840" y="490" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_reject" value="Reject Restaurant Listing" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;" vertex="1" parent="1"><mxGeometry x="840" y="560" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_users" value="View / Manage All Users" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;" vertex="1" parent="1"><mxGeometry x="840" y="630" width="180" height="50" as="geometry"/></mxCell>
+
+        <!-- ACTOR GENERALIZATION -->
+        <mxCell id="gen1" style="html=1;endArrow=block;endFill=0;endSize=16;" edge="1" parent="1" source="act_cust" target="act_reg"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gen2" style="html=1;endArrow=block;endFill=0;endSize=16;" edge="1" parent="1" source="act_owner" target="act_reg"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="gen3" style="html=1;endArrow=block;endFill=0;endSize=16;" edge="1" parent="1" source="act_admin" target="act_reg"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- GUEST ASSOCIATIONS -->
+        <mxCell id="a1" style="html=1;endArrow=none;" edge="1" parent="1" source="act_guest" target="uc_browse"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a2" style="html=1;endArrow=none;" edge="1" parent="1" source="act_guest" target="uc_detail"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a3" style="html=1;endArrow=none;" edge="1" parent="1" source="act_guest" target="uc_history"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a4" style="html=1;endArrow=none;" edge="1" parent="1" source="act_guest" target="uc_register"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- REGISTERED USER ASSOCIATIONS (shared by customer/owner/admin) -->
+        <mxCell id="a5" style="html=1;endArrow=none;" edge="1" parent="1" source="act_reg" target="uc_login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a6" style="html=1;endArrow=none;" edge="1" parent="1" source="act_reg" target="uc_browse"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- OWNER ASSOCIATIONS -->
+        <mxCell id="a7" style="html=1;endArrow=none;" edge="1" parent="1" source="act_owner" target="uc_create"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a8" style="html=1;endArrow=none;" edge="1" parent="1" source="act_owner" target="uc_update"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a9" style="html=1;endArrow=none;" edge="1" parent="1" source="act_owner" target="uc_delete"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a10" style="html=1;endArrow=none;" edge="1" parent="1" source="act_owner" target="uc_ownview"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ADMIN ASSOCIATIONS -->
+        <mxCell id="a11" style="html=1;endArrow=none;" edge="1" parent="1" source="act_admin" target="uc_pending"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a12" style="html=1;endArrow=none;" edge="1" parent="1" source="act_admin" target="uc_approve"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a13" style="html=1;endArrow=none;" edge="1" parent="1" source="act_admin" target="uc_reject"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a14" style="html=1;endArrow=none;" edge="1" parent="1" source="act_admin" target="uc_users"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a15" style="html=1;endArrow=none;" edge="1" parent="1" source="act_admin" target="uc_create"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- INCLUDE RELATIONSHIP: restricted use cases require Login -->
+        <mxCell id="inc1" value="&lt;&lt;include&gt;&gt;" style="html=1;endArrow=open;dashed=1;fontSize=10;" edge="1" parent="1" source="uc_create" target="uc_login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="inc2" value="&lt;&lt;include&gt;&gt;" style="html=1;endArrow=open;dashed=1;fontSize=10;" edge="1" parent="1" source="uc_approve" target="uc_login"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

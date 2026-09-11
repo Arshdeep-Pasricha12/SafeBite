@@ -1,0 +1,48 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Sequence Diagram - Login" id="seq-diagram">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- LIFELINE HEADERS -->
+        <mxCell id="lh1" value="User&#10;(Browser)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="20" y="40" width="140" height="40" as="geometry"/></mxCell>
+        <mxCell id="lh2" value="LoginRegister.jsx&#10;(Form)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="220" y="40" width="140" height="40" as="geometry"/></mxCell>
+        <mxCell id="lh3" value="AuthContext&#10;.login()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="420" y="40" width="140" height="40" as="geometry"/></mxCell>
+        <mxCell id="lh4" value="api.js&#10;(Axios)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="620" y="40" width="140" height="40" as="geometry"/></mxCell>
+        <mxCell id="lh5" value="FastAPI&#10;POST /api/auth/login" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="820" y="40" width="160" height="40" as="geometry"/></mxCell>
+        <mxCell id="lh6" value="security.py&#10;(verify_password /&#10;create_access_token)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1040" y="40" width="140" height="50" as="geometry"/></mxCell>
+        <mxCell id="lh7" value="SQLite&#10;users table" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1220" y="40" width="140" height="40" as="geometry"/></mxCell>
+
+        <!-- LIFELINES (vertical dashed) -->
+        <mxCell id="ll1" style="html=1;endArrow=none;dashed=1;" edge="1" parent="1" source="lh1" target="lh1"><mxGeometry relative="1" as="geometry"><mxPoint x="90" y="80" as="sourcePoint"/><mxPoint x="90" y="820" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="ll2" style="html=1;endArrow=none;dashed=1;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="290" y="80" as="sourcePoint"/><mxPoint x="290" y="820" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="ll3" style="html=1;endArrow=none;dashed=1;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="490" y="80" as="sourcePoint"/><mxPoint x="490" y="820" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="ll4" style="html=1;endArrow=none;dashed=1;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="690" y="80" as="sourcePoint"/><mxPoint x="690" y="820" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="ll5" style="html=1;endArrow=none;dashed=1;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="900" y="90" as="sourcePoint"/><mxPoint x="900" y="820" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="ll6" style="html=1;endArrow=none;dashed=1;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1110" y="90" as="sourcePoint"/><mxPoint x="1110" y="820" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="ll7" style="html=1;endArrow=none;dashed=1;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1290" y="80" as="sourcePoint"/><mxPoint x="1290" y="820" as="targetPoint"/></mxGeometry></mxCell>
+
+        <!-- MESSAGES -->
+        <mxCell id="m1" value="1: enters email + password, clicks Login" style="html=1;endArrow=block;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="90" y="110" as="sourcePoint"/><mxPoint x="290" y="110" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m2" value="2: login(email, password)" style="html=1;endArrow=block;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="290" y="150" as="sourcePoint"/><mxPoint x="490" y="150" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m3" value="3: api.post('/auth/login', {email,password})" style="html=1;endArrow=block;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="490" y="190" as="sourcePoint"/><mxPoint x="690" y="190" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m4" value="4: HTTP POST /api/auth/login (JSON body)" style="html=1;endArrow=block;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="690" y="230" as="sourcePoint"/><mxPoint x="900" y="230" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m5" value="5: db.query(User).filter(email==...)" style="html=1;endArrow=block;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="900" y="270" as="sourcePoint"/><mxPoint x="1290" y="270" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m6" value="6: returns User row (or none)" style="html=1;endArrow=block;dashed=1;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1290" y="310" as="sourcePoint"/><mxPoint x="900" y="310" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m7" value="7: verify_password(password, user.password_hash)" style="html=1;endArrow=block;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="900" y="350" as="sourcePoint"/><mxPoint x="1110" y="350" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m8" value="8: bcrypt match result (True/False)" style="html=1;endArrow=block;dashed=1;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1110" y="390" as="sourcePoint"/><mxPoint x="900" y="390" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="alt1" value="alt  [invalid credentials]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;align=left;spacingLeft=6;dashed=1;" vertex="1" parent="1"><mxGeometry x="690" y="410" width="600" height="60" as="geometry"/></mxCell>
+        <mxCell id="m9" value="9: 400 Bad Request 'Incorrect email or password'" style="html=1;endArrow=block;dashed=1;fontSize=10;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="900" y="450" as="sourcePoint"/><mxPoint x="690" y="450" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m10" value="10: create_access_token({email, role})" style="html=1;endArrow=block;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="900" y="500" as="sourcePoint"/><mxPoint x="1110" y="500" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m11" value="11: signed JWT token" style="html=1;endArrow=block;dashed=1;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1110" y="540" as="sourcePoint"/><mxPoint x="900" y="540" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m12" value="12: 200 OK {access_token, role, email, full_name}" style="html=1;endArrow=block;dashed=1;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="900" y="580" as="sourcePoint"/><mxPoint x="690" y="580" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m13" value="13: resolve response" style="html=1;endArrow=block;dashed=1;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="690" y="620" as="sourcePoint"/><mxPoint x="490" y="620" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m14" value="14: setUser(userData); localStorage.setItem(token,user);&#10;axios.defaults.headers.Authorization = Bearer token" style="html=1;endArrow=none;fontSize=10;" vertex="1" parent="1"><mxGeometry x="500" y="650" width="220" height="30" as="geometry"/></mxCell>
+        <mxCell id="m15" value="15: { success: true }" style="html=1;endArrow=block;dashed=1;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="490" y="700" as="sourcePoint"/><mxPoint x="290" y="700" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m16" value="16: redirect to role-based dashboard" style="html=1;endArrow=block;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="290" y="740" as="sourcePoint"/><mxPoint x="90" y="740" as="targetPoint"/></mxGeometry></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

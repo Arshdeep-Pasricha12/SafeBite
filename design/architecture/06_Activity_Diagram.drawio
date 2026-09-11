@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Activity Diagram" id="act-diagram">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- SWIMLANES -->
+        <mxCell id="pool" value="Restaurant Listing Submission &amp; Approval" style="swimlane;horizontal=0;html=1;startSize=30;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="900" height="900" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_owner" value="Owner" style="swimlane;horizontal=0;html=1;startSize=24;fillColor=#ffe6cc;" vertex="1" parent="pool">
+          <mxGeometry y="30" width="900" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_sys" value="System (FastAPI)" style="swimlane;horizontal=0;html=1;startSize=24;fillColor=#d5e8d4;" vertex="1" parent="pool">
+          <mxGeometry y="270" width="900" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_admin" value="Administrator" style="swimlane;horizontal=0;html=1;startSize=24;fillColor=#f8cecc;" vertex="1" parent="pool">
+          <mxGeometry y="550" width="900" height="350" as="geometry" />
+        </mxCell>
+
+        <!-- OWNER LANE -->
+        <mxCell id="a_start" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;" vertex="1" parent="lane_owner"><mxGeometry x="40" y="20" width="30" height="30" as="geometry"/></mxCell>
+        <mxCell id="a_login" value="Log in as Owner" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_owner"><mxGeometry x="110" y="15" width="160" height="40" as="geometry"/></mxCell>
+        <mxCell id="a_fill" value="Fill restaurant listing&#10;form (name, cuisine,&#10;license, address...)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_owner"><mxGeometry x="320" y="10" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_submit" value="Submit listing&#10;(POST /api/restaurants)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_owner"><mxGeometry x="550" y="10" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_notify_reject" value="Receive rejection;&#10;listing stays hidden" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_owner"><mxGeometry x="320" y="150" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_notify_approve" value="Listing goes live&#10;for customers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_owner"><mxGeometry x="600" y="150" width="180" height="50" as="geometry"/></mxCell>
+
+        <!-- SYSTEM LANE -->
+        <mxCell id="a_create" value="Create Restaurant row&#10;approval_status = 'Pending'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_sys"><mxGeometry x="550" y="20" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_pendinglist" value="List appears in&#10;GET /admin/pending-restaurants" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_sys"><mxGeometry x="550" y="100" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_dec_wait" value="Wait for&#10;admin decision" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_sys"><mxGeometry x="410" y="180" width="120" height="60" as="geometry"/></mxCell>
+        <mxCell id="a_set_approved" value="Set approval_status&#10;= 'Approved'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_sys"><mxGeometry x="600" y="200" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_set_rejected" value="Set approval_status&#10;= 'Rejected'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_sys"><mxGeometry x="330" y="200" width="180" height="50" as="geometry"/></mxCell>
+
+        <!-- ADMIN LANE -->
+        <mxCell id="a_login2" value="Log in as Administrator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_admin"><mxGeometry x="40" y="20" width="180" height="40" as="geometry"/></mxCell>
+        <mxCell id="a_review" value="Review pending&#10;restaurant listing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_admin"><mxGeometry x="270" y="15" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_decision" value="Approve or reject?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_admin"><mxGeometry x="500" y="10" width="160" height="60" as="geometry"/></mxCell>
+        <mxCell id="a_approve_act" value="PUT /admin/restaurants/&#123;id&#125;/approve" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_admin"><mxGeometry x="720" y="10" width="160" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_reject_act" value="PUT /admin/restaurants/&#123;id&#125;/reject" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="lane_admin"><mxGeometry x="500" y="120" width="160" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_end1" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#ffffff;" vertex="1" parent="lane_admin"><mxGeometry x="900" y="30" width="30" height="30" as="geometry"/></mxCell>
+        <mxCell id="a_endcircle" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="lane_admin"><mxGeometry x="895" y="25" width="40" height="40" as="geometry"/></mxCell>
+
+        <!-- FLOW EDGES -->
+        <mxCell id="f1" style="html=1;endArrow=block;" edge="1" parent="1" source="a_start" target="a_login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f2" style="html=1;endArrow=block;" edge="1" parent="1" source="a_login" target="a_fill"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f3" style="html=1;endArrow=block;" edge="1" parent="1" source="a_fill" target="a_submit"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f4" style="html=1;endArrow=block;" edge="1" parent="1" source="a_submit" target="a_create"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f5" style="html=1;endArrow=block;" edge="1" parent="1" source="a_create" target="a_pendinglist"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f6" style="html=1;endArrow=block;" edge="1" parent="1" source="a_pendinglist" target="a_login2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f7" style="html=1;endArrow=block;" edge="1" parent="1" source="a_login2" target="a_review"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f8" style="html=1;endArrow=block;" edge="1" parent="1" source="a_review" target="a_decision"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f9" value="approve" style="html=1;endArrow=block;fontSize=10;" edge="1" parent="1" source="a_decision" target="a_approve_act"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f10" value="reject" style="html=1;endArrow=block;fontSize=10;" edge="1" parent="1" source="a_decision" target="a_reject_act"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f11" style="html=1;endArrow=block;" edge="1" parent="1" source="a_approve_act" target="a_set_approved"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f12" style="html=1;endArrow=block;" edge="1" parent="1" source="a_reject_act" target="a_set_rejected"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f13" style="html=1;endArrow=block;" edge="1" parent="1" source="a_set_approved" target="a_notify_approve"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f14" style="html=1;endArrow=block;" edge="1" parent="1" source="a_set_rejected" target="a_notify_reject"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f15" style="html=1;endArrow=block;" edge="1" parent="1" source="a_notify_approve" target="a_endcircle"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f16" style="html=1;endArrow=block;" edge="1" parent="1" source="a_notify_reject" target="a_endcircle"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

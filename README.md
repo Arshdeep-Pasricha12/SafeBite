@@ -124,7 +124,36 @@ SafeBite follows a modern web architecture:
 
 ---
 
-## 🚀 5. Development Setup & Quick Start
+## 🎨 5. Software Design
+
+SafeBite is designed using a **3-Tier Layered Architecture** (Presentation → Business Logic → Data), emphasizing modularity through domain-separated API routers, low coupling via a centralized `services/api.js` abstraction, and encapsulation through `AuthContext` and `ProtectedRoute`. Every layer can be developed, tested, and replaced independently, making the system easy to extend and maintain.
+
+### Architecture & Design Diagrams
+
+> Open `.drawio` files at [diagrams.net](https://app.diagrams.net/) to edit.
+
+| Diagram | Editable Source | PNG Export |
+|---|---|---|
+| High-Level Architecture | N/A | [SafeBite_Architecture.drawio.png](design/architecture/SafeBite_Architecture.drawio.png) |
+| ER Diagram | [SafeBite_ER_Diagram_Exact.drawio](design/architecture/SafeBite_ER_Diagram_Exact.drawio) | [ER.drawio.png](design/architecture/ER.drawio.png) |
+| Component Diagram | [02_Component_Diagram.drawio](design/architecture/02_Component_Diagram.drawio) | [component.drawio.png](design/architecture/component.drawio.png) |
+| Use Case Diagram | [03_Use_Case_Diagram.drawio](design/architecture/03_Use_Case_Diagram.drawio) | [usecase.drawio.png](design/architecture/usecase.drawio.png) |
+| Sequence Diagram | [04_Sequence_Diagram.drawio](design/architecture/04_Sequence_Diagram.drawio) | [sequence.drawio.png](design/architecture/sequence.drawio.png) |
+| Class Diagram | [05_Class_Diagram.drawio](design/architecture/05_Class_Diagram.drawio) | [Class Diagram.drawio.png](design/architecture/Class%20Diagram.drawio.png) |
+| Activity Diagram | [06_Activity_Diagram.drawio](design/architecture/06_Activity_Diagram.drawio) | [activity.drawio.png](design/architecture/activity.drawio.png) |
+| State Chart | [07_State_Chart.drawio](design/architecture/07_State_Chart.drawio) | [statechart.drawio.png](design/architecture/statechart.drawio.png) |
+
+### UI Design — Figma Screens
+
+| Screen | Preview |
+|---|---|
+| Screen 1 | [screen1.png](design/figma/screen1.png) |
+| Screen 2 | [screen2.png](design/figma/screen2.png) |
+| Screen 3 | [screen3.png](design/figma/screen3.png) |
+
+---
+
+## 🚀 6. Development Setup & Quick Start
 
 ### Folder Structure
 ```text
