@@ -1,0 +1,113 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0" scale="1" border="0">
+  <diagram id="detailed_arch" name="SafeBite MVP Architecture">
+    <mxGraphModel dx="1940" dy="865" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="header" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a1a;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=16;" value="SafeBite Restaurant Discovery &amp; Approval Platform — MVP System Architecture" vertex="1">
+          <mxGeometry height="40" width="1440" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="col1" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#1a1a1a;strokeColor=#4a86e8;fontColor=#ffffff;fontStyle=1;" value="Frontend Layer (React + Vite + Tailwind CSS)" vertex="1">
+          <mxGeometry height="700" width="320" x="40" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="f_public" parent="col1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0b2342;strokeColor=#4a86e8;fontColor=#ffffff;align=left;spacingLeft=10;" value="Public Views&#xa;• Landing Page&#xa;• Restaurant Listings&#xa;• Detail Page" vertex="1">
+          <mxGeometry height="80" width="280" x="20" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f_auth" parent="col1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0b2342;strokeColor=#4a86e8;fontColor=#ffffff;align=left;spacingLeft=10;" value="Auth UI&#xa;• Login / Register Forms&#xa;• Account Type Toggle" vertex="1">
+          <mxGeometry height="70" width="280" x="20" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="f_owner" parent="col1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0b2342;strokeColor=#4a86e8;fontColor=#ffffff;align=left;spacingLeft=10;" value="Owner Dashboard&#xa;• My Listings &amp; Status Badges&#xa;• Create / Edit Restaurant Modal" vertex="1">
+          <mxGeometry height="70" width="280" x="20" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="f_admin" parent="col1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0b2342;strokeColor=#4a86e8;fontColor=#ffffff;align=left;spacingLeft=10;" value="Admin Dashboard&#xa;• Pending Approvals Queue&#xa;• Quick Approve/Reject Actions&#xa;• User Management Table" vertex="1">
+          <mxGeometry height="80" width="280" x="20" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="f_state" parent="col1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0b2342;strokeColor=#4a86e8;fontColor=#ffffff;align=left;spacingLeft=10;" value="State &amp; API Layer&#xa;• AuthContext (JWT State)&#xa;• Axios API Service (api.js)" vertex="1">
+          <mxGeometry height="70" width="280" x="20" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="col2" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#1a1a1a;strokeColor=#6aa84f;fontColor=#ffffff;fontStyle=1;" value="Backend Layer (FastAPI / Python)" vertex="1">
+          <mxGeometry height="700" width="340" x="400" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b_router" parent="col2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1b3318;strokeColor=#6aa84f;fontColor=#ffffff;align=left;spacingLeft=10;" value="API Router (/api)&#xa;• /auth/     • /restaurants/&#xa;• /users/    • /admin/" vertex="1">
+          <mxGeometry height="70" width="280" x="30" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="b_sec" parent="col2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1b3318;strokeColor=#6aa84f;fontColor=#ffffff;align=left;spacingLeft=10;" value="Security &amp; Auth Module&#xa;• Passlib (Bcrypt Password Hashing)&#xa;• PyJWT (Token Sign/Verify)&#xa;• Role-Based Access Control (RBAC)" vertex="1">
+          <mxGeometry height="80" width="280" x="30" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="b_logic" parent="col2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1b3318;strokeColor=#6aa84f;fontColor=#ffffff;align=left;spacingLeft=10;" value="Core Business Logic&#xa;• Public Discovery &amp; Search Engine&#xa;• Owner CRUD &amp; Status Auto-Reset&#xa;• Admin Workflow Engine (Pending → Approve)" vertex="1">
+          <mxGeometry height="80" width="280" x="30" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="b_orm" parent="col2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1b3318;strokeColor=#6aa84f;fontColor=#ffffff;align=left;spacingLeft=10;" value="ORM &amp; Schemas Layer&#xa;• Pydantic Schemas (Validation)&#xa;• SQLAlchemy Models (Data Abstraction)" vertex="1">
+          <mxGeometry height="70" width="280" x="30" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="col3" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#1a1a1a;strokeColor=#e69138;fontColor=#ffffff;fontStyle=1;" value="Data Layer (Persistence &amp; Seeding)" vertex="1">
+          <mxGeometry height="700" width="340" x="780" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="d_db" parent="col3" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#4d2b0e;strokeColor=#e69138;fontColor=#ffffff;" value="SQLite Database (safebite.db)&#xa;PostgreSQL-Ready via SQLAlchemy" vertex="1">
+          <mxGeometry height="80" width="260" x="40" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d_tables" parent="col3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4d2b0e;strokeColor=#e69138;fontColor=#ffffff;align=left;spacingLeft=10;" value="Database Tables:&#xa;1. users (id, email, password_hash, role)&#xa;2. restaurants (id, name, license, status...)&#xa;3. restaurant_images (id, url, primary)&#xa;4. inspections, violations, codes..." vertex="1">
+          <mxGeometry height="100" width="260" x="40" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="d_seed" parent="col3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4d2b0e;strokeColor=#e69138;fontColor=#ffffff;align=left;spacingLeft=10;" value="Data Normalization &amp; Seeding&#xa;• Synthetic Dataset (Faker/CSV)&#xa;• Pre-populates 1000+ Approved Listings&#xa;• Seeds test Admin &amp; Owner accounts" vertex="1">
+          <mxGeometry height="80" width="260" x="40" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="col4" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#1a1a1a;strokeColor=#8e7cc3;fontColor=#ffffff;fontStyle=1;" value="Infrastructure &amp; Containerization" vertex="1">
+          <mxGeometry height="700" width="320" x="1160" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="i_docker" parent="col4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#20124d;strokeColor=#8e7cc3;fontColor=#ffffff;" value="Docker Engine" vertex="1">
+          <mxGeometry height="40" width="260" x="30" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="i_compose" parent="col4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#20124d;strokeColor=#8e7cc3;fontColor=#ffffff;" value="Docker Compose Orchestration&#xa;(docker-compose.yml)" vertex="1">
+          <mxGeometry height="60" width="260" x="30" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="i_front" parent="col4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#20124d;strokeColor=#8e7cc3;fontColor=#ffffff;align=left;spacingLeft=10;" value="Frontend Container&#xa;• Node.js / Vite Server&#xa;• Port 3001" vertex="1">
+          <mxGeometry height="70" width="260" x="30" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="i_back" parent="col4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#20124d;strokeColor=#8e7cc3;fontColor=#ffffff;align=left;spacingLeft=10;" value="Backend Container&#xa;• Uvicorn ASGI Server&#xa;• FastAPI Application&#xa;• Port 8000" vertex="1">
+          <mxGeometry height="80" width="260" x="30" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="i_vol" parent="col4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#20124d;strokeColor=#8e7cc3;fontColor=#ffffff;align=left;spacingLeft=10;" value="Docker Volume&#xa;• Mounts SQLite DB (/database)" vertex="1">
+          <mxGeometry height="60" width="260" x="30" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_f_b" edge="1" parent="1" source="f_state" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#4a86e8;strokeWidth=2;" target="b_router">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="715" />
+              <mxPoint x="360" y="165" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label_f_b" connectable="0" parent="edge_f_b" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#ffffff;labelBackgroundColor=#1a1a1a;" value="HTTP / REST Requests&#xa;(JSON + JWT Bearer Token)" vertex="1">
+          <mxGeometry relative="1" x="-0.2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_b_d" edge="1" parent="1" source="b_orm" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#6aa84f;strokeWidth=2;" target="d_db">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="750" y="715" />
+              <mxPoint x="750" y="170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label_b_d" connectable="0" parent="edge_b_d" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#ffffff;labelBackgroundColor=#1a1a1a;" value="SQLAlchemy ORM Queries / Reads &amp; Writes" vertex="1">
+          <mxGeometry relative="1" x="-0.3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_seed" edge="1" parent="1" source="d_seed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;strokeColor=#e69138;strokeWidth=2;dashed=1;dashPattern=8 8;" target="d_tables">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_seed" connectable="0" parent="edge_seed" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#ffffff;labelBackgroundColor=#1a1a1a;" value="Initial CSV Data Seeding" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a1a;strokeColor=#555555;fontColor=#cccccc;fontSize=12;" value="Legend: Blue = React UI Layer | Green = FastAPI Backend Layer | Orange = Database/Storage | Purple = Docker Containerization" vertex="1">
+          <mxGeometry height="40" width="1440" x="40" y="810" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

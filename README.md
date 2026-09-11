@@ -124,32 +124,39 @@ SafeBite follows a modern web architecture:
 
 ---
 
-## 🎨 5. Software Design
+## 🎨 5. Software Design (DA-2 / Review 2)
 
-SafeBite is designed using a **3-Tier Layered Architecture** (Presentation → Business Logic → Data), emphasizing modularity through domain-separated API routers, low coupling via a centralized `services/api.js` abstraction, and encapsulation through `AuthContext` and `ProtectedRoute`. Every layer can be developed, tested, and replaced independently, making the system easy to extend and maintain.
+SafeBite is architected using a **3-Tier Layered Web Architecture** (Presentation → Business Logic → Data Persistence) with containerized deployment orchestration via Docker Compose. The design prioritizes **modularity** through domain-partitioned API routers (`/auth`, `/restaurants`, `/inspections`, `/admin`), **low coupling** via FastAPI's Inversion of Control Dependency Injection (`Depends()`) and a centralized frontend API service (`services/api.js`), and **encapsulation** through isolated cryptographic services (`core/security.py`), client session guards (`AuthContext`, `ProtectedRoute`), and Pydantic DTO contracts. Every layer can be developed, tested, and maintained independently.
 
-### Architecture & Design Diagrams
+> 📄 **Full Software Design Document:** [SafeBite_Software_Design_Document.pdf](docs/SafeBite_Software_Design_Document.pdf)
 
-> Open `.drawio` files at [diagrams.net](https://app.diagrams.net/) to edit.
+### 📐 Architecture & Design Diagrams
 
-| Diagram | Editable Source | PNG Export |
+> All `.drawio` files are fully editable vector models that can be opened directly at [diagrams.net](https://app.diagrams.net/).
+
+| Diagram | Type | Editable Source | PNG Export |
+|---|---|---|---|
+| **High-Level System Architecture** | Architectural Blueprint | [SafeBite_Architecture.drawio](design/architecture/SafeBite_Architecture.drawio) | [SafeBite_Architecture.drawio.png](design/architecture/SafeBite_Architecture.drawio.png) |
+| **Component Diagram** | Structural / Modular | [02_Component_Diagram.drawio](design/architecture/02_Component_Diagram.drawio) | [component.drawio.png](design/architecture/component.drawio.png) |
+| **Use Case Diagram** | Behavioral / Interaction | [03_Use_Case_Diagram.drawio](design/architecture/03_Use_Case_Diagram.drawio) | [usecase.drawio.png](design/architecture/usecase.drawio.png) |
+| **Sequence Diagram** | Dynamic Interaction | [04_Sequence_Diagram.drawio](design/architecture/04_Sequence_Diagram.drawio) | [sequence.drawio.png](design/architecture/sequence.drawio.png) |
+| **Class Diagram** | Detailed OO Model | [05_Class_Diagram.drawio](design/architecture/05_Class_Diagram.drawio) | [Class Diagram.drawio.png](design/architecture/Class%20Diagram.drawio.png) |
+| **Activity Diagram** | Workflow / Process Flow | [06_Activity_Diagram.drawio](design/architecture/06_Activity_Diagram.drawio) | [activity.drawio.png](design/architecture/activity.drawio.png) |
+| **State Chart Diagram** | Lifecycle / State Transitions | [07_State_Chart.drawio](design/architecture/07_State_Chart.drawio) | [statechart.drawio.png](design/architecture/statechart.drawio.png) |
+| **Entity Relationship (ER) Diagram** | Data Model / Schema | [SafeBite_ER_Diagram_Exact.drawio](design/architecture/SafeBite_ER_Diagram_Exact.drawio) | [ER.drawio.png](design/architecture/ER.drawio.png) |
+
+### 📱 User Interface (UI/UX) Design — 6 Figma Screens
+
+The SafeBite user interface is structured around accessibility, responsiveness, and clear food-safety visual indicators across consumer, restaurant owner, and regulatory administrator workflows:
+
+| Screen | Description | Preview |
 |---|---|---|
-| High-Level Architecture | N/A | [SafeBite_Architecture.drawio.png](design/architecture/SafeBite_Architecture.drawio.png) |
-| ER Diagram | [SafeBite_ER_Diagram_Exact.drawio](design/architecture/SafeBite_ER_Diagram_Exact.drawio) | [ER.drawio.png](design/architecture/ER.drawio.png) |
-| Component Diagram | [02_Component_Diagram.drawio](design/architecture/02_Component_Diagram.drawio) | [component.drawio.png](design/architecture/component.drawio.png) |
-| Use Case Diagram | [03_Use_Case_Diagram.drawio](design/architecture/03_Use_Case_Diagram.drawio) | [usecase.drawio.png](design/architecture/usecase.drawio.png) |
-| Sequence Diagram | [04_Sequence_Diagram.drawio](design/architecture/04_Sequence_Diagram.drawio) | [sequence.drawio.png](design/architecture/sequence.drawio.png) |
-| Class Diagram | [05_Class_Diagram.drawio](design/architecture/05_Class_Diagram.drawio) | [Class Diagram.drawio.png](design/architecture/Class%20Diagram.drawio.png) |
-| Activity Diagram | [06_Activity_Diagram.drawio](design/architecture/06_Activity_Diagram.drawio) | [activity.drawio.png](design/architecture/activity.drawio.png) |
-| State Chart | [07_State_Chart.drawio](design/architecture/07_State_Chart.drawio) | [statechart.drawio.png](design/architecture/statechart.drawio.png) |
-
-### UI Design — Figma Screens
-
-| Screen | Preview |
-|---|---|
-| Screen 1 | [screen1.png](design/figma/screen1.png) |
-| Screen 2 | [screen2.png](design/figma/screen2.png) |
-| Screen 3 | [screen3.png](design/figma/screen3.png) |
+| **Screen 1: Authentication Portal** | Customer/Owner/Admin Login, Registration & Role Toggle | [screen1_auth.png](design/figma/screen1_auth.png) |
+| **Screen 2: Public Landing Page** | Hero Banner, Search CTA, Top Rated & Critical Safety Violations | [screen2_home.png](design/figma/screen2_home.png) |
+| **Screen 3: Restaurant Discovery & Search** | Multi-facet Search Filters, Safety Rating Badges & Restaurant Cards | [screen3_listing.png](design/figma/screen3_listing.png) |
+| **Screen 4: Restaurant Detail & History** | Comprehensive Hygiene Score, Inspection Timeline & Violation Details | [screen4_detail.png](design/figma/screen4_detail.png) |
+| **Screen 5: Owner Management Dashboard** | Restaurant Profile Management, License Status & Edit Modals | [screen5_owner.png](design/figma/screen5_owner.png) |
+| **Screen 6: Admin Moderation Dashboard** | Regulatory Audit Queue, Pending Approvals & Inline Moderation | [screen6_admin.png](design/figma/screen6_admin.png) |
 
 ---
 
@@ -158,6 +165,9 @@ SafeBite is designed using a **3-Tier Layered Architecture** (Presentation → B
 ### Folder Structure
 ```text
 safebite/
+├── design/                   # Software Design artifacts (DA-2)
+│   ├── architecture/         # Editable Draw.io sources & PNG exports
+│   └── figma/                # 6 Figma UI high-fidelity screens
 ├── frontend/                 # React 18 + Vite + Tailwind CSS
 │   ├── src/
 │   ├── Dockerfile
@@ -168,7 +178,7 @@ safebite/
 │   └── requirements.txt
 ├── database/                 # Contains pre-seeded SQLite database
 │   └── safebite.db           # 1,000+ Indian restaurants pre-loaded
-├── docs/                     # Documentation
+├── docs/                     # Documentation & Design Specifications
 ├── .gitignore                # Rules for version control
 ├── docker-compose.yml        # Docker orchestration
 └── README.md
@@ -178,7 +188,7 @@ safebite/
 Ensure **Docker Desktop** is installed and running.
 
 ```bash
-git clone https://github.com/rudransh27sharma/SafeBite.git
+git clone https://github.com/Arshdeep-Pasricha12/SafeBite.git
 cd SafeBite
 docker-compose up --build
 ```
