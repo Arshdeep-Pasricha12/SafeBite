@@ -9,26 +9,30 @@ from app.api.auth import get_current_user
 from app.models.models import User
 from app.schemas.schemas import UserOut
 
+from contextlib import asynccontextmanager
+
+# Startup Table Creation via lifespan
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    Base.metadata.create_all(bind=engine)
+    yield
+
 # Initialize FastAPI App
 app = FastAPI(
     title="SafeBite API",
     description="Restaurant Discovery & Transparency Platform API",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 # Set up CORS Middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For dev prototyping, allow all origins. Can be restricted in production.
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Startup Table Creation (as a fallback/safety measure)
-@app.on_event("startup")
-def on_startup():
-    Base.metadata.create_all(bind=engine)
 
 # Include Routers
 app.include_router(auth.router, prefix="/api")
@@ -46,6 +50,8 @@ def get_profile_alias(current_user: User = Depends(get_current_user)):
     return current_user
 
 @app.get("/", tags=["health"])
+@app.get("/health", tags=["health"])
+@app.get("/api/health", tags=["health"])
 def health_check():
     return {
         "status": "healthy",

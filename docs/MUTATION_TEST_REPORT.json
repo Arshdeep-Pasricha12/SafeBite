@@ -1,0 +1,58 @@
+{
+  "target": "backend/app/core/assessment.py",
+  "total_mutants": 7,
+  "killed_mutants": 7,
+  "survived_mutants": 0,
+  "mutation_score_percent": 100.0,
+  "mutations": [
+    {
+      "id": "MUT_01",
+      "description": "Mutate CRITICAL_PENALTY: 18 -> 0 (ignore critical violations)",
+      "status": "KILLED",
+      "failures": 2,
+      "errors": 0
+    },
+    {
+      "id": "MUT_02",
+      "description": "Mutate CRITICAL_PENALTY: 18 -> 5 (insufficient penalty)",
+      "status": "KILLED",
+      "failures": 2,
+      "errors": 0
+    },
+    {
+      "id": "MUT_03",
+      "description": "Mutate REPEAT_MULTIPLIER: 1.5 -> 1.0 (no escalating penalty for repeats)",
+      "status": "KILLED",
+      "failures": 1,
+      "errors": 0
+    },
+    {
+      "id": "MUT_04",
+      "description": "Mutate VERIFIED_COMPLAINT_PENALTY: 6 -> 0 (ignore complaints)",
+      "status": "KILLED",
+      "failures": 1,
+      "errors": 0
+    },
+    {
+      "id": "MUT_05",
+      "description": "Mutate STALE_DAYS_THRESHOLD: 365 -> 9999 (never flag inspections as stale)",
+      "status": "KILLED",
+      "failures": 2,
+      "errors": 0
+    },
+    {
+      "id": "MUT_06",
+      "description": "Mutate EXPIRED_DAYS_THRESHOLD: 730 -> 9999 (never expire old data)",
+      "status": "KILLED",
+      "failures": 1,
+      "errors": 0
+    },
+    {
+      "id": "MUT_07",
+      "description": "Mutate REPEAT_MULTIPLIER: 1.5 -> 0.0 (zero penalty on repeats)",
+      "status": "KILLED",
+      "failures": 1,
+      "errors": 0
+    }
+  ]
+}

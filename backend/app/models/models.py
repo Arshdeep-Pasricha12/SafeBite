@@ -11,7 +11,7 @@ class User(Base):
     password_hash = Column(String, nullable=False)
     full_name = Column(String, nullable=False)
     role = Column(String, nullable=False)  # 'customer', 'owner', 'admin'
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.datetime.now(datetime.timezone.utc))
 
     # Relationships
     restaurants = relationship("Restaurant", back_populates="owner", cascade="all, delete-orphan")
@@ -48,15 +48,26 @@ class Restaurant(Base):
     latest_complaint = Column(String, nullable=True)
     complaint_status = Column(String, nullable=True)  # 'Verified', 'Rejected', 'Under Investigation'
     
+    # Data Provenance and Traceability
+    source_name = Column(String, default="SafeBite Synthetic Benchmark", nullable=True)
+    source_url = Column(String, default="https://safebite.demo/datasets/benchmark-v1", nullable=True)
+    source_record_id = Column(String, nullable=True)
+    last_synced_at = Column(DateTime, nullable=True)
+    verification_status = Column(String, default="Synthetic Demonstration", nullable=True)  # 'Verified Official', 'Synthetic Demonstration', 'Self-Reported', 'Pending Verification'
+    confidence_score = Column(Float, default=0.75, nullable=True)
+    is_synthetic = Column(Boolean, default=True, nullable=False)
+    data_freshness_status = Column(String, default="Current", nullable=True)  # 'Current', 'Stale', 'Expired', 'Unknown'
+
     approval_status = Column(String, default="Pending", index=True, nullable=False)  # 'Pending', 'Approved', 'Rejected'
     owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.datetime.now(datetime.timezone.utc))
 
     # Relationships
     owner = relationship("User", back_populates="restaurants")
     images = relationship("RestaurantImage", back_populates="restaurant", cascade="all, delete-orphan")
     inspections = relationship("Inspection", back_populates="restaurant", cascade="all, delete-orphan")
     complaints = relationship("Complaint", back_populates="restaurant", cascade="all, delete-orphan")
+    correction_requests = relationship("CorrectionRequest", back_populates="restaurant", cascade="all, delete-orphan")
 
 class RestaurantImage(Base):
     __tablename__ = "restaurant_images"
@@ -80,7 +91,7 @@ class Inspector(Base):
     department = Column(String, nullable=False)
     contact_email = Column(String, nullable=True)
     active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.datetime.now(datetime.timezone.utc))
 
     # Relationships
     inspections = relationship("Inspection", back_populates="inspector")
@@ -117,7 +128,13 @@ class Inspection(Base):
     # Compliance
     previous_violations_corrected = Column(Boolean, default=False)
     
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    # Provenance
+    source_name = Column(String, default="SafeBite Synthetic Benchmark", nullable=True)
+    source_record_id = Column(String, nullable=True)
+    verification_status = Column(String, default="Synthetic Demonstration", nullable=True)
+    is_synthetic = Column(Boolean, default=True, nullable=False)
+
+    created_at = Column(DateTime, default=lambda: datetime.datetime.now(datetime.timezone.utc))
 
     # Relationships
     restaurant = relationship("Restaurant", back_populates="inspections")
@@ -169,7 +186,7 @@ class Violation(Base):
     repeat_violation = Column(Boolean, default=False)  # Has this violation occurred before?
     management_response = Column(Text, nullable=True)
     
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.datetime.now(datetime.timezone.utc))
 
     # Relationships
     inspection = relationship("Inspection", back_populates="violations")
@@ -188,7 +205,7 @@ class InspectionPhoto(Base):
     photo_type = Column(String, nullable=False)  # 'General', 'Equipment', 'Storage', 'Cleanliness'
     taken_by = Column(String, nullable=True)  # Inspector name
     
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.datetime.now(datetime.timezone.utc))
 
     # Relationships
     inspection = relationship("Inspection", back_populates="photos")
@@ -204,7 +221,7 @@ class ViolationPhoto(Base):
     caption = Column(String, nullable=True)
     shows_before_after = Column(String, nullable=False)  # 'Before', 'After', 'During'
     
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.datetime.now(datetime.timezone.utc))
 
     # Relationships
     violation = relationship("Violation", back_populates="photos")
@@ -240,11 +257,31 @@ class Complaint(Base):
     follow_up_inspection_required = Column(Boolean, default=False)
     follow_up_completed = Column(Boolean, default=False)
     
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.datetime.now(datetime.timezone.utc))
 
     # Relationships
     restaurant = relationship("Restaurant", back_populates="complaints")
     assigned_inspector = relationship("Inspector", foreign_keys=[assigned_inspector_id])
 
 
-# Update Restaurant model to include new relationships
+class CorrectionRequest(Base):
+    __tablename__ = "correction_requests"
+
+    id = Column(Integer, primary_key=True, index=True)
+    restaurant_id = Column(String, ForeignKey("restaurants.id"), nullable=False)
+    inspection_id = Column(Integer, ForeignKey("inspections.id"), nullable=True)
+    owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+
+    request_type = Column(String, nullable=False)  # 'Data Correction', 'Inspection Dispute', 'License Update'
+    details = Column(Text, nullable=False)
+    evidence_url = Column(String, nullable=True)
+    status = Column(String, default="Pending", nullable=False)  # 'Pending', 'Approved', 'Rejected'
+    admin_notes = Column(Text, nullable=True)
+
+    created_at = Column(DateTime, default=lambda: datetime.datetime.now(datetime.timezone.utc))
+    reviewed_at = Column(DateTime, nullable=True)
+
+    # Relationships
+    restaurant = relationship("Restaurant", back_populates="correction_requests")
+    inspection = relationship("Inspection")
+    owner = relationship("User")

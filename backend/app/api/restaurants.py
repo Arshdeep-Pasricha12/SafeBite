@@ -4,9 +4,14 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 
 from app.core.database import get_db
-from app.models.models import Restaurant, RestaurantImage, User
-from app.schemas.schemas import RestaurantCreate, RestaurantUpdate, RestaurantOut
+from app.models.models import Restaurant, RestaurantImage, User, Inspection, Violation, Complaint, CorrectionRequest
+from app.schemas.schemas import (
+    RestaurantCreate, RestaurantUpdate, RestaurantOut, 
+    RestaurantMatchRequest, RestaurantMatchResponse,
+    CorrectionRequestCreate, CorrectionRequestOut, FoodSafetyAssessmentOut
+)
 from app.api.auth import get_current_user, get_current_owner, get_optional_current_user
+from app.core.assessment import FoodSafetyAssessmentEngine
 
 router = APIRouter(prefix="/restaurants", tags=["restaurants"])
 
@@ -99,6 +104,138 @@ def get_restaurants(
     restaurants = query.offset(skip).limit(limit).all()
     return restaurants
 
+def compute_restaurant_assessment(restaurant: Restaurant, db: Session) -> dict:
+    """Run explainable risk assessment for a restaurant model."""
+    inspections = db.query(Inspection).filter(
+        Inspection.restaurant_id == restaurant.id
+    ).order_by(Inspection.inspection_date.desc()).all()
+
+    insp_list = []
+    for insp in inspections:
+        violations = db.query(Violation).filter(Violation.inspection_id == insp.id).all()
+        insp_list.append({
+            "id": insp.id,
+            "inspection_date": insp.inspection_date,
+            "inspection_type": insp.inspection_type,
+            "total_score": insp.total_score,
+            "pass_fail_status": insp.pass_fail_status,
+            "risk_level": insp.risk_level,
+            "violations": [{
+                "severity": v.severity_level,
+                "description": v.description,
+                "points_deducted": v.points_deducted,
+                "repeat_violation": v.repeat_violation
+            } for v in violations]
+        })
+
+    complaints = db.query(Complaint).filter(Complaint.restaurant_id == restaurant.id).all()
+    comp_list = [{
+        "status": c.status,
+        "complaint_type": c.complaint_type,
+        "description": c.description
+    } for c in complaints]
+
+    rest_dict = {
+        "id": restaurant.id,
+        "name": restaurant.name,
+        "license_status": restaurant.license_status,
+        "previous_violations": restaurant.previous_violations,
+        "latest_violation": restaurant.latest_violation,
+        "violation_severity": restaurant.violation_severity,
+        "is_synthetic": restaurant.is_synthetic,
+        "source_name": restaurant.source_name,
+        "verification_status": restaurant.verification_status
+    }
+
+    return FoodSafetyAssessmentEngine.evaluate(rest_dict, insp_list, comp_list)
+
+def normalize_text(text: str) -> str:
+    import re
+    if not text:
+        return ""
+    text = text.lower()
+    text = re.sub(r"[^\w\s]", " ", text)
+    tokens = [w for w in text.split() if w not in {"the", "restaurant", "cafe", "kitchen", "outlet", "express", "bistro", "and", "food"}]
+    return " ".join(tokens)
+
+def find_best_restaurant_match(name: str, city: Optional[str], db: Session):
+    import difflib
+    norm_query = normalize_text(name)
+    if not norm_query:
+        return None, 0.0
+
+    query = db.query(Restaurant).filter(Restaurant.approval_status == "Approved")
+    if city:
+        city_filtered = query.filter(Restaurant.city.ilike(f"%{city}%")).all()
+        candidates = city_filtered if city_filtered else query.all()
+    else:
+        candidates = query.all()
+
+    best_match = None
+    best_score = 0.0
+
+    for r in candidates:
+        norm_r = normalize_text(r.name)
+        if norm_query == norm_r:
+            return r, 0.98
+        if norm_query in norm_r or norm_r in norm_query:
+            score = 0.88
+            if score > best_score:
+                best_score = score
+                best_match = r
+        ratio = difflib.SequenceMatcher(None, norm_query, norm_r).ratio()
+        if ratio > best_score and ratio >= 0.65:
+            best_score = ratio
+            best_match = r
+
+    return best_match, round(best_score, 2)
+
+@router.get("/match", response_model=RestaurantMatchResponse)
+def match_restaurant_get(
+    name: str = Query(..., description="Restaurant name to match from food delivery site or companion demo"),
+    city: Optional[str] = Query(None, description="Optional city"),
+    address: Optional[str] = Query(None, description="Optional address"),
+    platform: Optional[str] = Query("generic", description="Calling platform (swiggy, zomato, companion_demo)"),
+    db: Session = Depends(get_db)
+):
+    """
+    Match restaurant endpoint for browser extension and companion ordering demo.
+    Returns matched restaurant, match confidence, and explainable safety assessment.
+    """
+    restaurant, confidence = find_best_restaurant_match(name, city, db)
+    if not restaurant or confidence < 0.60:
+        return RestaurantMatchResponse(
+            matched=False,
+            match_confidence=confidence,
+            restaurant=None,
+            assessment=None,
+            source_attribution="SafeBite Transparency Engine",
+            notice=f"No matching restaurant found in SafeBite registry for '{name}'."
+        )
+
+    assessment_data = compute_restaurant_assessment(restaurant, db)
+    restaurant_out = RestaurantOut.model_validate(restaurant)
+    restaurant_out.assessment = FoodSafetyAssessmentOut(**assessment_data)
+
+    return RestaurantMatchResponse(
+        matched=True,
+        match_confidence=confidence,
+        restaurant=restaurant_out,
+        assessment=FoodSafetyAssessmentOut(**assessment_data),
+        source_attribution=restaurant.source_name or "SafeBite Transparency Engine",
+        notice=assessment_data["provenance_disclaimer"]
+    )
+
+@router.post("/match", response_model=RestaurantMatchResponse)
+def match_restaurant_post(
+    req: RestaurantMatchRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    POST variant of match endpoint accepting JSON body.
+    """
+    return match_restaurant_get(name=req.name, city=req.city, address=req.address, platform=req.platform, db=db)
+
 @router.get("/{id}", response_model=RestaurantOut)
 def get_restaurant(id: str, db: Session = Depends(get_db), current_user: Optional[User] = Depends(get_optional_current_user)):
     restaurant = db.query(Restaurant).filter(Restaurant.id == id).first()
@@ -126,7 +263,11 @@ def get_restaurant(id: str, db: Session = Depends(get_db), current_user: Optiona
                 detail="Restaurant not found"
             )
 
-    return restaurant
+    # Attach dynamic explainable assessment
+    assessment_data = compute_restaurant_assessment(restaurant, db)
+    restaurant_out = RestaurantOut.model_validate(restaurant)
+    restaurant_out.assessment = FoodSafetyAssessmentOut(**assessment_data)
+    return restaurant_out
 
 @router.post("", response_model=RestaurantOut, status_code=status.HTTP_201_CREATED)
 def create_restaurant(
@@ -147,9 +288,10 @@ def create_restaurant(
     if last_restaurant and last_restaurant.id.startswith("R"):
         try:
             last_num = int(last_restaurant.id[1:])
-            new_id = f"R{last_num + 1:04d}"
+            new_num = last_num + 1
+            new_id = f"R{new_num:04d}"
         except ValueError:
-            new_id = f"R{datetime.datetime.utcnow().timestamp()}"
+            new_id = f"R{int(datetime.datetime.now(datetime.timezone.utc).timestamp())}"
     else:
         new_id = "R0101"
 
@@ -290,3 +432,70 @@ def delete_restaurant(
     db.delete(restaurant)
     db.commit()
     return None
+
+@router.post("/{id}/correction-request", response_model=CorrectionRequestOut, status_code=status.HTTP_201_CREATED)
+def submit_correction_request(
+    id: str,
+    req_in: CorrectionRequestCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Submit a data correction request or inspection dispute for a restaurant.
+    Restricted to restaurant owners or administrators.
+    """
+    restaurant = db.query(Restaurant).filter(Restaurant.id == id).first()
+    if not restaurant:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Restaurant not found"
+        )
+
+    if current_user.role == "owner" and restaurant.owner_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You can only submit correction requests for your own restaurant."
+        )
+
+    new_request = CorrectionRequest(
+        restaurant_id=restaurant.id,
+        inspection_id=req_in.inspection_id,
+        owner_id=current_user.id,
+        request_type=req_in.request_type,
+        details=req_in.details,
+        evidence_url=req_in.evidence_url,
+        status="Pending"
+    )
+    db.add(new_request)
+    db.commit()
+    db.refresh(new_request)
+    return new_request
+
+@router.get("/{id}/correction-requests", response_model=List[CorrectionRequestOut])
+def get_restaurant_correction_requests(
+    id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Get correction requests for a restaurant.
+    Accessible by owner of restaurant or administrators.
+    """
+    restaurant = db.query(Restaurant).filter(Restaurant.id == id).first()
+    if not restaurant:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Restaurant not found"
+        )
+
+    if current_user.role == "owner" and restaurant.owner_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Access Denied"
+        )
+
+    requests = db.query(CorrectionRequest).filter(
+        CorrectionRequest.restaurant_id == id
+    ).order_by(CorrectionRequest.id.desc()).all()
+    return requests
+

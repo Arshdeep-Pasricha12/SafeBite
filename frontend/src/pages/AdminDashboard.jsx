@@ -7,6 +7,7 @@ const AdminDashboard = () => {
   const [pendingRestaurants, setPendingRestaurants] = useState([])
   const [users, setUsers] = useState([])
   const [allRestaurants, setAllRestaurants] = useState([])
+  const [correctionRequests, setCorrectionRequests] = useState([])
   const [loading, setLoading] = useState(true)
   const [actionLoading, setActionLoading] = useState({})
   const [activeTab, setActiveTab] = useState('pending')
@@ -18,19 +19,36 @@ const AdminDashboard = () => {
   const loadData = async () => {
     try {
       setLoading(true)
-      const [pendingRes, usersRes, allRes] = await Promise.all([
+      const [pendingRes, usersRes, allRes, corrRes] = await Promise.all([
         adminApi.getPendingRestaurants(),
         adminApi.getUsers(),
-        restaurantApi.getAll({ limit: 100 })
+        restaurantApi.getAll({ limit: 100 }),
+        adminApi.getCorrectionRequests({ status_filter: 'Pending' })
       ])
       
       setPendingRestaurants(pendingRes.data)
       setUsers(usersRes.data)
       setAllRestaurants(allRes.data)
+      setCorrectionRequests(corrRes.data || [])
     } catch (error) {
       console.error('Error loading admin data:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleReviewCorrection = async (id, status, notes = '') => {
+    try {
+      setActionLoading(prev => ({ ...prev, [id]: status }))
+      await adminApi.reviewCorrectionRequest(id, {
+        status: status,
+        admin_notes: notes || `Reviewed and ${status.toLowerCase()} by Administrator.`
+      })
+      setCorrectionRequests(prev => prev.filter(r => r.id !== id))
+    } catch (err) {
+      alert('Failed to review correction request.')
+    } finally {
+      setActionLoading(prev => ({ ...prev, [id]: null }))
     }
   }
 
@@ -203,6 +221,16 @@ const AdminDashboard = () => {
               }`}
             >
               All Restaurants ({stats.totalRestaurants})
+            </button>
+            <button
+              onClick={() => setActiveTab('corrections')}
+              className={`px-6 py-4 font-medium text-sm ${
+                activeTab === 'corrections'
+                  ? 'text-safebite-600 border-b-2 border-safebite-600'
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              Correction Requests ({correctionRequests.length})
             </button>
           </div>
 
@@ -407,6 +435,69 @@ const AdminDashboard = () => {
                     ))}
                   </tbody>
                 </table>
+              </div>
+            )}
+
+            {/* Correction Requests Tab */}
+            {activeTab === 'corrections' && (
+              <div>
+                {correctionRequests.length === 0 ? (
+                  <div className="text-center py-8">
+                    <CheckCircle size={48} className="mx-auto text-green-400 mb-4" />
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">No Pending Disputes</h3>
+                    <p className="text-gray-600">All owner correction and dispute requests have been processed.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    {correctionRequests.map((req) => (
+                      <div key={req.id} className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-3">
+                          <div>
+                            <div className="flex items-center space-x-2">
+                              <span className="font-bold text-gray-900">{req.request_type}</span>
+                              <span className="text-xs bg-yellow-100 text-yellow-800 font-semibold px-2 py-0.5 rounded">
+                                {req.status}
+                              </span>
+                            </div>
+                            <p className="text-xs text-gray-500 mt-1">
+                              Restaurant ID: <Link to={`/restaurants/${req.restaurant_id}`} className="text-blue-600 underline font-mono">{req.restaurant_id}</Link> | Owner ID: #{req.owner_id} | Date: {new Date(req.created_at).toLocaleString()}
+                            </p>
+                          </div>
+
+                          <div className="flex items-center space-x-2">
+                            <button
+                              onClick={() => handleReviewCorrection(req.id, 'Approved')}
+                              disabled={actionLoading[req.id]}
+                              className="px-3 py-1.5 bg-green-600 text-white rounded text-xs font-bold hover:bg-green-700 disabled:opacity-50"
+                            >
+                              Approve
+                            </button>
+                            <button
+                              onClick={() => handleReviewCorrection(req.id, 'Rejected')}
+                              disabled={actionLoading[req.id]}
+                              className="px-3 py-1.5 bg-red-600 text-white rounded text-xs font-bold hover:bg-red-700 disabled:opacity-50"
+                            >
+                              Reject
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="bg-white p-3 rounded border text-sm text-gray-700">
+                          {req.details}
+                        </div>
+
+                        {req.evidence_url && (
+                          <div className="mt-2 text-xs">
+                            <span className="text-gray-500">Evidence Link: </span>
+                            <a href={req.evidence_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                              {req.evidence_url}
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </div>

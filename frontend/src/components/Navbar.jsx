@@ -38,6 +38,20 @@ const Navbar = () => {
             >
               Restaurants
             </Link>
+
+            <Link 
+              to="/demo/order" 
+              className={`font-medium transition-colors duration-200 flex items-center space-x-1.5 ${
+                isActive('/demo/order') 
+                  ? 'text-rose-600' 
+                  : 'text-gray-600 hover:text-rose-600'
+              }`}
+            >
+              <span>Order Demo</span>
+              <span className="bg-rose-100 text-rose-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase">
+                Live
+              </span>
+            </Link>
             
             {isAuthenticated ? (
               <div className="flex items-center space-x-4">

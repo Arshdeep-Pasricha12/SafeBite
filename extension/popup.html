@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeBite Transparency</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <div class="logo-box">
+      <div class="logo-icon">S</div>
+      <div>
+        <h1 class="logo-title">SafeBite</h1>
+        <p class="logo-sub">Food Safety Transparency</p>
+      </div>
+    </div>
+    <span class="status-badge" id="conn-status">Connected</span>
+  </div>
+
+  <div class="body-content">
+    <!-- Search Box -->
+    <div class="search-card">
+      <label for="search-input" class="field-label">Look Up Restaurant Safety:</label>
+      <div class="search-row">
+        <input type="text" id="search-input" placeholder="e.g. Haldiram, Chipotle, Starbucks..." />
+        <button id="search-btn">Search</button>
+      </div>
+    </div>
+
+    <!-- Result Box -->
+    <div id="result-box" class="result-box hidden">
+      <div class="res-header">
+        <div>
+          <h2 id="res-name" class="res-name">Restaurant Name</h2>
+          <p id="res-addr" class="res-addr">Address</p>
+        </div>
+        <div class="score-pill">
+          <div id="res-score" class="score-val">--</div>
+          <div class="score-sub">Score</div>
+        </div>
+      </div>
+
+      <div class="res-details">
+        <div class="detail-row">
+          <span class="detail-label">Rating:</span>
+          <span id="res-rating" class="detail-val">--</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Status:</span>
+          <span id="res-status" class="detail-val">--</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Source:</span>
+          <span id="res-source" class="detail-val">--</span>
+        </div>
+      </div>
+
+      <div id="res-advice" class="advice-box">
+        Consumer guidance advice goes here.
+      </div>
+
+      <a id="res-link" href="#" target="_blank" class="audit-btn">
+        View Complete Safety Audit →
+      </a>
+    </div>
+
+    <!-- Quick Navigation -->
+    <div class="quick-links">
+      <a href="http://localhost:3001/demo/order" target="_blank" class="nav-btn primary">
+        🍔 Open Companion Ordering Demo
+      </a>
+      <a href="http://localhost:3001/restaurants" target="_blank" class="nav-btn secondary">
+        🔍 SafeBite Restaurant Directory
+      </a>
+    </div>
+
+    <!-- Settings Toggle -->
+    <details class="settings-box">
+      <summary>Backend API Configuration</summary>
+      <div class="settings-content">
+        <label for="api-url">API Base URL:</label>
+        <div class="settings-row">
+          <input type="text" id="api-url" value="http://localhost:8000" />
+          <button id="save-settings-btn">Save</button>
+        </div>
+        <p class="settings-hint">SafeBite FastAPI service running locally.</p>
+      </div>
+    </details>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

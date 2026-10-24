@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Search, Filter, MapPin, Star, Clock, Phone } from 'lucide-react'
+import { Search, Filter, MapPin, Star, Clock, Phone, Shield, AlertTriangle, CheckCircle2 } from 'lucide-react'
 import { restaurantApi } from '../services/api'
 
 const RestaurantListing = () => {
@@ -12,6 +12,7 @@ const RestaurantListing = () => {
     search: searchParams.get('search') || '',
     city: searchParams.get('city') || '',
     cuisine: searchParams.get('cuisine') || '',
+    provenance: searchParams.get('provenance') || '',
     sort_by: 'safety_score_desc'
   })
 
@@ -36,12 +37,20 @@ const RestaurantListing = () => {
       })
 
       const response = await restaurantApi.getAll(params)
-      const data = response.data
+      let data = response.data
+
+      // Apply client-side provenance filter if requested
+      if (filters.provenance === 'verified') {
+        data = data.filter(r => !r.is_synthetic)
+      } else if (filters.provenance === 'synthetic') {
+        data = data.filter(r => r.is_synthetic)
+      }
+
       setRestaurants(data)
 
       // Extract unique cities and cuisines for filters
-      const uniqueCities = [...new Set(data.map(r => r.city))].sort()
-      const uniqueCuisines = [...new Set(data.map(r => r.cuisine))].sort()
+      const uniqueCities = [...new Set(response.data.map(r => r.city))].sort()
+      const uniqueCuisines = [...new Set(response.data.map(r => r.cuisine))].sort()
       
       setCities(uniqueCities)
       setCuisines(uniqueCuisines)
@@ -69,6 +78,7 @@ const RestaurantListing = () => {
       search: '',
       city: '',
       cuisine: '',
+      provenance: '',
       sort_by: 'safety_score_desc'
     })
     setSearchParams({})
@@ -166,6 +176,20 @@ const RestaurantListing = () => {
                 </select>
               </div>
 
+              {/* Data Provenance Filter */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Data Provenance</label>
+                <select
+                  value={filters.provenance}
+                  onChange={(e) => handleFilterChange('provenance', e.target.value)}
+                  className="input-field"
+                >
+                  <option value="">All Data Sources</option>
+                  <option value="verified">Verified Official Only (FSSAI / NYC OpenData)</option>
+                  <option value="synthetic">Synthetic Benchmark Only</option>
+                </select>
+              </div>
+
               {/* Sort By */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
@@ -225,21 +249,42 @@ const RestaurantListing = () => {
                         alt={restaurant.name}
                         className="w-full h-48 object-cover rounded-t-xl"
                       />
-                      <div className="absolute top-4 right-4">
+                      <div className="absolute top-4 right-4 flex flex-col items-end gap-1">
                         <span className={getSafetyBadgeClass(restaurant.safety_rating)}>
                           {restaurant.safety_rating}
                         </span>
+                        {restaurant.data_freshness_status === 'Stale' && (
+                          <span className="bg-amber-500 text-white text-xs px-2 py-0.5 rounded-full font-bold shadow">
+                            Stale Data
+                          </span>
+                        )}
                       </div>
-                      <div className="absolute bottom-4 left-4">
-                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusBadgeClass(restaurant.restaurant_status)}`}>
+                      <div className="absolute bottom-4 left-4 flex gap-2">
+                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeClass(restaurant.restaurant_status)}`}>
                           {restaurant.restaurant_status}
                         </span>
+                        {!restaurant.is_synthetic ? (
+                          <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-600 text-white flex items-center shadow">
+                            <Shield size={12} className="mr-1" /> Verified
+                          </span>
+                        ) : (
+                          <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-900/80 text-amber-300 flex items-center backdrop-blur-sm">
+                            <AlertTriangle size={12} className="mr-1" /> Synthetic
+                          </span>
+                        )}
                       </div>
                     </div>
                     
                     <div className="p-6">
-                      <h3 className="font-bold text-xl text-gray-900 mb-2">{restaurant.name}</h3>
-                      <p className="text-safebite-600 font-medium mb-2">{restaurant.cuisine}</p>
+                      <div className="flex items-center justify-between mb-1">
+                        <h3 className="font-bold text-xl text-gray-900">{restaurant.name}</h3>
+                      </div>
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="text-safebite-600 font-medium text-sm">{restaurant.cuisine}</p>
+                        <span className="text-xs text-gray-500 font-mono bg-gray-100 px-2 py-0.5 rounded">
+                          {restaurant.source_name ? restaurant.source_name.split(' ')[0] : 'Benchmark'}
+                        </span>
+                      </div>
                       
                       <div className="flex items-start text-gray-600 mb-3">
                         <MapPin size={16} className="mr-2 mt-0.5 flex-shrink-0" />

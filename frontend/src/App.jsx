@@ -7,6 +7,7 @@ import RestaurantListing from './pages/RestaurantListing'
 import RestaurantDetail from './pages/RestaurantDetail'
 import OwnerDashboard from './pages/OwnerDashboard'
 import AdminDashboard from './pages/AdminDashboard'
+import CompanionOrderingDemo from './pages/CompanionOrderingDemo'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
@@ -18,8 +19,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<LoginRegister />} />
+            <Route path="/login" element={<LoginRegister />} />
             <Route path="/restaurants" element={<RestaurantListing />} />
             <Route path="/restaurants/:id" element={<RestaurantDetail />} />
+            <Route path="/demo/order" element={<CompanionOrderingDemo />} />
             <Route 
               path="/owner/dashboard" 
               element={
@@ -30,6 +33,14 @@ function App() {
             />
             <Route 
               path="/admin/dashboard" 
+              element={
+                <ProtectedRoute roles={['admin']}>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin" 
               element={
                 <ProtectedRoute roles={['admin']}>
                   <AdminDashboard />

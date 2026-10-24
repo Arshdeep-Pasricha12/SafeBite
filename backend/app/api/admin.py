@@ -3,9 +3,10 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from app.core.database import get_db
-from app.models.models import Restaurant, User
-from app.schemas.schemas import RestaurantOut, UserOut
+from app.models.models import Restaurant, User, CorrectionRequest
+from app.schemas.schemas import RestaurantOut, UserOut, CorrectionRequestOut, CorrectionRequestReview
 from app.api.auth import get_current_admin
+import datetime
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -74,3 +75,42 @@ def get_users(
     """
     users = db.query(User).order_by(User.id.desc()).all()
     return users
+
+@router.get("/correction-requests", response_model=List[CorrectionRequestOut])
+def get_admin_correction_requests(
+    status_filter: str = "Pending",
+    db: Session = Depends(get_db),
+    admin: User = Depends(get_current_admin)
+):
+    """
+    Get all correction requests submitted by restaurant owners.
+    """
+    query = db.query(CorrectionRequest)
+    if status_filter != "all":
+        query = query.filter(CorrectionRequest.status == status_filter)
+    return query.order_by(CorrectionRequest.id.desc()).all()
+
+@router.put("/correction-requests/{id}/review", response_model=CorrectionRequestOut)
+def review_correction_request(
+    id: int,
+    review_in: CorrectionRequestReview,
+    db: Session = Depends(get_db),
+    admin: User = Depends(get_current_admin)
+):
+    """
+    Review (approve or reject) a correction request.
+    """
+    req = db.query(CorrectionRequest).filter(CorrectionRequest.id == id).first()
+    if not req:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Correction request not found"
+        )
+
+    req.status = review_in.status
+    req.admin_notes = review_in.admin_notes
+    req.reviewed_at = datetime.datetime.now(datetime.timezone.utc)
+    db.commit()
+    db.refresh(req)
+    return req
+

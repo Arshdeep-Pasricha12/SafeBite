@@ -1,212 +1,159 @@
-# SafeBite - Restaurant Food Safety Transparency Platform
+# SafeBite — Food Safety Transparency Platform
 
-A comprehensive platform for discovering restaurants with verified food safety standards and transparent inspection histories.
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688.svg?style=flat&logo=fastapi)](https://fastapi.tiangolo.com)
+[![React](https://img.shields.io/badge/React-18.2-61DAFB.svg?style=flat&logo=react)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-4.5-646CFF.svg?style=flat&logo=vite)](https://vitejs.dev/)
+[![Pytest](https://img.shields.io/badge/Tests-23%2F23%20Passing-brightgreen.svg?style=flat&logo=pytest)](https://docs.pytest.org/)
+[![Mutation Score](https://img.shields.io/badge/Mutation%20Score-100%25-brightgreen.svg)](docs/MUTATION_TEST_REPORT.json)
+[![Manifest V3](https://img.shields.io/badge/Chrome%20Extension-Manifest%20V3-4285F4.svg?logo=googlechrome)](extension/)
+[![Evidence Dossier](https://img.shields.io/badge/PDF-Consolidated%20Evidence%20Report-red.svg)](docs/project-evidence/SafeBite_Project_Evidence.pdf)
 
-## 📋 1. Vision Document
-
-### Project Name & Overview
-**SafeBite** is a restaurant discovery platform that prioritizes food safety transparency, helping customers make informed dining decisions based on comprehensive inspection histories, safety scores, and violation records from FSSAI health department data.
-
-### Problem it Solves
-- **Lack of Food Safety Transparency**: Customers have no easy access to inspection histories
-- **Hidden Violation Records**: Critical health violations buried in government databases
-- **Uninformed Dining Decisions**: People cannot assess food safety risks before visiting
-- **Scattered Safety Information**: Inspection data and violation codes are not centralized
-
-### Target Users (Personas)
-| Persona | Role / Age | Goal | Pain Point |
-|---------|------------|------|------------|
-| **Sarah** | Health-Conscious Customer, 32 | Find restaurants with excellent safety records for family dining | Cannot easily access inspection histories |
-| **Mike** | Restaurant Owner, 45 | Showcase excellent safety practices and improve visibility | Customers do not see safety improvements |
-| **Lisa** | Health Inspector, 38 | Ensure restaurants maintain safety standards | Limited public visibility of inspection data |
-
-### Vision Statement
-*"To create a transparent ecosystem where food safety information is accessible, empowering customers to make informed dining decisions while helping restaurants showcase their commitment to health standards."*
-
-### Key Features / Goals
-1. **Comprehensive Inspection History** - Complete timeline of all inspections with violation details
-2. **Real-time Safety Scores** - 0-100 safety ratings based on latest FSSAI inspections
-3. **Violation Transparency** - Detailed FSSAI violation codes with corrective actions
-4. **Inspector Credibility** - Health inspector profiles with credentials and experience
-5. **Restaurant Discovery** - Advanced filtering by safety scores, cuisine, and location
-6. **Admin Approval Workflow** - Quality control for restaurant listings
-7. **Mobile-Responsive Design** - Accessible on all devices
-
-### Success Metrics
-| Metric | Target |
-|--------|--------|
-| **User Engagement** | 80%+ of users check inspection history before restaurant visits |
-| **Data Accuracy** | 95%+ accuracy in safety score calculations |
-| **Restaurant Adoption** | 500+ restaurants onboarded in first 6 months |
-| **Customer Trust** | 4.5+ star average app rating |
-| **Health Impact** | 20% reduction in food poisoning reports in coverage areas |
+> **SafeBite** is an enterprise-grade food safety intelligence and transparency platform engineered to bridge information asymmetry between municipal health inspection registries (such as FSSAI FoSTaC in India and NYC DOHMH in the US) and consumers ordering food online.
 
 ---
 
-## 📝 2. User Stories (25 GitHub Issues)
+## 📑 Quick Navigation & Documentation Index
 
-All 25 user stories have been tracked in the GitHub Issues section of this repository. They are grouped into 7 main Epics:
-1. **Epic 1: Authentication & Management** (3 Stories)
-2. **Epic 2: Restaurant Search & Discovery** (4 Stories)
-3. **Epic 3: Food Safety & Inspection History** (5 Stories)
-4. **Epic 4: Restaurant Owner Management** (4 Stories)
-5. **Epic 5: Admin Management** (4 Stories)
-6. **Epic 6: User Experience** (3 Stories)
-7. **Epic 7: Data Management** (2 Stories)
+All 14 required system documents are organized in [`docs/`](docs/) and linked below:
 
----
-
-## 🎯 3. MoSCoW Prioritization
-
-### Must Have (Critical for MVP)
-- Story 1 - User Registration
-- Story 2 - User Login
-- Story 4 - Browse Restaurant Listings
-- Story 7 - View Restaurant Details
-- Story 8 - View Safety Score
-- Story 9 - View Inspection History Timeline
-- Story 13 - Create Restaurant Listing
-- Story 17 - Review Pending Applications
-- Story 18 - Approve Restaurant Listings
-- Story 21 - Responsive Mobile Design
-- Story 24 - CSV Data Import System
-
-### Should Have (Important for User Experience)
-- Story 3 - Role-Based Access Control
-- Story 5 - Filter Restaurants by Criteria
-- Story 6 - Search Restaurants by Name
-- Story 10 - View Inspection Violation Details
-- Story 14 - Edit Restaurant Information
-- Story 15 - View Listing Approval Status
-- Story 19 - Reject Restaurant Listings
-- Story 22 - Navigation and Site Structure
-- Story 23 - Loading States & Performance
-
-### Could Have (Nice to Have Features)
-- Story 11 - View Inspector Information
-- Story 12 - View Violation Photos
-- Story 16 - Manage Multiple Locations
-- Story 20 - Manage Users
-- Story 25 - Data Synchronization with Health Departments
-
-### Won't Have (Future Releases)
-- Advanced Analytics Dashboard
-- Live Notifications
-- Mobile Application
-- Customer Review System
+| Document | Description |
+|---|---|
+| [**Consolidated Evidence Dossier (PDF)**](docs/project-evidence/SafeBite_Project_Evidence.pdf) | **11-Page PDF** containing complete project proof, genuine UI screenshots, test runs, and audit logs |
+| [**Implementation Audit**](docs/IMPLEMENTATION_AUDIT.md) | Exhaustive baseline audit, resolved defects, and architectural refactoring |
+| [**Feature Status Matrix**](docs/FEATURE_STATUS.md) | Granular matrix of fully implemented, demonstrable, and bounded features |
+| [**Technical Decisions**](docs/TECHNICAL_DECISIONS.md) | Architecture rationale: scoring engine, data provenance, auth, and extension |
+| [**Data Sources**](docs/DATA_SOURCES.md) | Verified official data registry specifications (FSSAI FoSTaC & NYC DOHMH) |
+| [**Data Import Guide**](docs/DATA_IMPORT_GUIDE.md) | Ingestion CLI pipeline, JSON schema validation, and rejected-record handling |
+| [**Browser Extension**](docs/BROWSER_EXTENSION.md) | Manifest V3 Chrome Extension architecture, DOM matching, and injected UI |
+| [**Testing Strategy**](docs/TESTING_STRATEGY.md) | Quality assurance methodology: Unit, Integration, Regression, and Mutation testing |
+| [**Test Cases Specification**](docs/TEST_CASES.md) | Granular test catalog with IDs, inputs, expected vs actual outputs |
+| [**Test Execution Results**](docs/TEST_RESULTS.md) | 23/23 Pytest logs, 100% mutation kill report, and test run evidence |
+| [**Version Control**](docs/VERSION_CONTROL.md) | Git branching strategy, commit conventions, rollback protocols, and `.gitignore` |
+| [**Build and Run Guide**](docs/BUILD_AND_RUN.md) | Step-by-step local setup, Docker Compose instructions, and health checks |
+| [**Demonstration Guide**](docs/DEMO_GUIDE.md) | Evaluator click-through walkthrough (Customer, Owner, Admin, Extension) |
+| [**Tools and Technologies**](docs/TOOLS_AND_TECHNOLOGIES.md) | Comprehensive inventory of libraries, versions, credentials, and local execution |
 
 ---
 
-## 🎨 Figma Wireframes
-[View Figma Wireframes Here](https://www.figma.com/design/bKqw8mWVk8IHUb1oXcNMG2/Untitled?node-id=0-1&p=f&t=ayZDpOpgXNiVLV9q-0)
+## 🏛️ System Architecture
 
-Includes screens for:
-1. Login / Sign Up
-2. Home Page
-3. Restaurant Details
-4. Owner Dashboard
-5. Admin Dashboard
+```mermaid
+graph TD
+    subgraph Data Sources
+        DS1[FSSAI FoSTaC Registry] --> INGEST[Data Ingestion Pipeline]
+        DS2[NYC Health DOHMH OpenData] --> INGEST
+        DS3[Synthetic Benchmark Set] --> DB[(SQLite Database)]
+        INGEST --> DB
+    end
 
----
+    subgraph Backend Core [FastAPI Service :8000]
+        DB --> ORM[SQLAlchemy 2.0 ORM]
+        ORM --> ENGINE[Explainable Assessment Engine]
+        ENGINE --> API[REST API Endpoints]
+        API --> MATCH[Fuzzy Restaurant Matching API]
+        API --> AUTH[JWT & Bcrypt Security Layer]
+        API --> CORR[Owner Dispute / Correction Workflow]
+    end
 
-## 🏗️ 4. Architecture
-
-SafeBite follows a modern web architecture:
-**Frontend (React)** → **Backend (FastAPI)** → **Database (SQLite)** → **Deployment (Docker)**
-
-### Tech Stack
-| Layer | Technology | Port |
-|-------|------------|------|
-| **Frontend** | React 18, Vite, Tailwind CSS, Axios | 3001 |
-| **Backend** | FastAPI, Python 3.12, Uvicorn, JWT | 8000 |
-| **Database** | SQLite, SQLAlchemy ORM | - |
-| **DevOps** | Docker, Docker Compose | - |
-
----
-
-## 🎨 5. Software Design (DA-2 / Review 2)
-
-SafeBite is architected using a **3-Tier Layered Web Architecture** (Presentation → Business Logic → Data Persistence) with containerized deployment orchestration via Docker Compose. The design prioritizes **modularity** through domain-partitioned API routers (`/auth`, `/restaurants`, `/inspections`, `/admin`), **low coupling** via FastAPI's Inversion of Control Dependency Injection (`Depends()`) and a centralized frontend API service (`services/api.js`), and **encapsulation** through isolated cryptographic services (`core/security.py`), client session guards (`AuthContext`, `ProtectedRoute`), and Pydantic DTO contracts. Every layer can be developed, tested, and maintained independently.
-
-> 📄 **Full Software Design Document:** [SafeBite_Software_Design_Document.pdf](docs/SafeBite_Software_Design_Document.pdf)
-
-### 📐 Architecture & Design Diagrams
-
-> All `.drawio` files are fully editable vector models that can be opened directly at [diagrams.net](https://app.diagrams.net/).
-
-| Diagram | Type | Editable Source | PNG Export |
-|---|---|---|---|
-| **High-Level System Architecture** | Architectural Blueprint | [SafeBite_Architecture.drawio](design/architecture/SafeBite_Architecture.drawio) | [SafeBite_Architecture.drawio.png](design/architecture/SafeBite_Architecture.drawio.png) |
-| **Component Diagram** | Structural / Modular | [02_Component_Diagram.drawio](design/architecture/02_Component_Diagram.drawio) | [component.drawio.png](design/architecture/component.drawio.png) |
-| **Use Case Diagram** | Behavioral / Interaction | [03_Use_Case_Diagram.drawio](design/architecture/03_Use_Case_Diagram.drawio) | [usecase.drawio.png](design/architecture/usecase.drawio.png) |
-| **Sequence Diagram** | Dynamic Interaction | [04_Sequence_Diagram.drawio](design/architecture/04_Sequence_Diagram.drawio) | [sequence.drawio.png](design/architecture/sequence.drawio.png) |
-| **Class Diagram** | Detailed OO Model | [05_Class_Diagram.drawio](design/architecture/05_Class_Diagram.drawio) | [Class Diagram.drawio.png](design/architecture/Class%20Diagram.drawio.png) |
-| **Activity Diagram** | Workflow / Process Flow | [06_Activity_Diagram.drawio](design/architecture/06_Activity_Diagram.drawio) | [activity.drawio.png](design/architecture/activity.drawio.png) |
-| **State Chart Diagram** | Lifecycle / State Transitions | [07_State_Chart.drawio](design/architecture/07_State_Chart.drawio) | [statechart.drawio.png](design/architecture/statechart.drawio.png) |
-| **Entity Relationship (ER) Diagram** | Data Model / Schema | [SafeBite_ER_Diagram_Exact.drawio](design/architecture/SafeBite_ER_Diagram_Exact.drawio) | [ER.drawio.png](design/architecture/ER.drawio.png) |
-
-### 📱 User Interface (UI/UX) Design — 6 Figma Screens
-
-The SafeBite user interface is structured around accessibility, responsiveness, and clear food-safety visual indicators across consumer, restaurant owner, and regulatory administrator workflows:
-
-| Screen | Description | Preview |
-|---|---|---|
-| **Screen 1: Authentication Portal** | Customer/Owner/Admin Login, Registration & Role Toggle | [screen1_auth.png](design/figma/screen1_auth.png) |
-| **Screen 2: Public Landing Page** | Hero Banner, Search CTA, Top Rated & Critical Safety Violations | [screen2_home.png](design/figma/screen2_home.png) |
-| **Screen 3: Restaurant Discovery & Search** | Multi-facet Search Filters, Safety Rating Badges & Restaurant Cards | [screen3_listing.png](design/figma/screen3_listing.png) |
-| **Screen 4: Restaurant Detail & History** | Comprehensive Hygiene Score, Inspection Timeline & Violation Details | [screen4_detail.png](design/figma/screen4_detail.png) |
-| **Screen 5: Owner Management Dashboard** | Restaurant Profile Management, License Status & Edit Modals | [screen5_owner.png](design/figma/screen5_owner.png) |
-| **Screen 6: Admin Moderation Dashboard** | Regulatory Audit Queue, Pending Approvals & Inline Moderation | [screen6_admin.png](design/figma/screen6_admin.png) |
-
----
-
-## 🚀 6. Development Setup & Quick Start
-
-### Folder Structure
-```text
-safebite/
-├── design/                   # Software Design artifacts (DA-2)
-│   ├── architecture/         # Editable Draw.io sources & PNG exports
-│   └── figma/                # 6 Figma UI high-fidelity screens
-├── frontend/                 # React 18 + Vite + Tailwind CSS
-│   ├── src/
-│   ├── Dockerfile
-│   └── package.json
-├── backend/                  # FastAPI + Python 3.12
-│   ├── app/
-│   ├── Dockerfile
-│   └── requirements.txt
-├── database/                 # Contains pre-seeded SQLite database
-│   └── safebite.db           # 1,000+ Indian restaurants pre-loaded
-├── docs/                     # Documentation & Design Specifications
-├── .gitignore                # Rules for version control
-├── docker-compose.yml        # Docker orchestration
-└── README.md
+    subgraph Consumer Touchpoints
+        API --> FE[SafeBite React SPA :5173]
+        MATCH --> EXT[Chrome Extension Manifest V3]
+        MATCH --> DEMO[Companion Delivery Demo /demo/order]
+    end
 ```
 
-### Run Locally (Docker)
-Ensure **Docker Desktop** is installed and running.
+---
 
+## 🌟 Core Innovations & Highlights
+
+1. **Traceable Data Provenance**:
+   - Every record carries rigorous provenance metadata (`source_name`, `source_url`, `source_record_id`, `verification_status`, `confidence_score`, `is_synthetic`, `data_freshness_status`).
+   - Official records (FSSAI / NYC) and synthetic benchmark records are strictly isolated. Synthetic records prominently carry disclaimers to prevent misleading consumers.
+2. **Deterministic, Explainable Assessment Engine**:
+   - Dynamic safety score (0–100) calculated from infraction severity, escalating repeat violations ($1.5\times$ penalty multiplier), inspection recency, verified complaints, and license suspension overrides.
+   - Provides consumer grade labels (`Excellent`, `Good`, `Needs Improvement`, `High Risk`), positive compliance factors, and risk deductions with consumer safety advisories.
+3. **Google Chrome Manifest V3 Extension**:
+   - Offline-capable service worker (`background.js`) and content script (`content.js`). Scrapes restaurant names from delivery order pages and displays real-time floating safety score pills.
+4. **Companion Food Ordering Demonstration**:
+   - Interactive delivery ordering simulation (`/demo/order`) providing a simulated Swiggy/Zomato style food menu, cart management, and real-time SafeBite audit popups.
+5. **Owner Dispute & Administrative Governance**:
+   - Restaurant owners can submit official evidence and dispute records (`POST /api/restaurants/{id}/correction-request`).
+   - Administrators review, approve, or reject correction requests via the dedicated tab on the Admin Dashboard (`/admin/dashboard`).
+
+---
+
+## ⚡ Quick Start (Local Run)
+
+### Prerequisites
+- Python 3.10+ (tested on Python 3.12.4)
+- Node.js 18+ (tested on Node 20.x)
+- Google Chrome (optional, for extension demonstration)
+
+### 1. Backend Setup
 ```bash
-git clone https://github.com/Arshdeep-Pasricha12/SafeBite.git
-cd SafeBite
+cd backend
+python -m venv venv
+# Windows:
+.\venv\Scripts\activate
+# Linux/macOS:
+source venv/bin/activate
+
+pip install -r requirements.txt reportlab selenium
+python migrate_db.py
+python ingest_inspection_data.py
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+*Backend health check:* `curl http://127.0.0.1:8000/api/health`
+
+### 2. Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
+*Frontend runs at:* `http://127.0.0.1:5173/`
+
+### 3. Demo Credentials
+| Role | Email | Password | Access |
+|---|---|---|---|
+| **Administrator** | `admin@safebite.demo` | `adminpassword` | Full moderation, approval, correction review |
+| **Customer** | `customer@safebite.demo` | `password123` | Directory browsing, inspection audit, demo order |
+| **Restaurant Owner** | `owner@safebite.demo` | `password123` | Listing management, dispute submission |
+
+---
+
+## 🐳 Docker Container Orchestration
+
+Run both backend and frontend simultaneously with Docker Compose:
+```bash
 docker-compose up --build
 ```
-
-**Access URLs:**
-- **Frontend App:** http://localhost:3001
-- **Backend API Docs (Swagger):** http://localhost:8000/docs
-
-*Note: The SQLite database comes fully pre-seeded out of the box.*
-
-### Branching Strategy (GitHub Flow)
-1. **main** - Production-ready code
-2. **feature/[name]** - Short-lived feature branches (e.g., `feature/docker-setup`)
-3. Open a Pull Request → Review → Squash & Merge
+- Frontend: `http://localhost:3000`
+- Backend API: `http://localhost:8000`
+- Health check: `http://localhost:8000/api/health`
 
 ---
 
-## 🔑 Demo Accounts
-- **Admin**: admin@safebite.demo / password123
-- **Customer**: customer@safebite.demo / password123  
-- **Restaurant Owner**: owner1@safebite.demo / password123
+## 🧪 Testing & Verification
+
+Execute the complete test suite:
+```bash
+cd backend
+# 1. Automated Integration, Unit, and Regression Tests (23 Tests)
+pytest -v
+
+# 2. Mutation Testing (Assessment Engine Fault Injection)
+python tests/run_mutation_testing.py
+```
+- **Pytest**: 23 passed in ~17s (100% pass rate)
+- **Mutation Testing**: 7 mutants generated, 7 killed (100% mutation score)
+
+---
+
+## 🧩 Chrome Browser Extension Setup
+
+1. Open Google Chrome and navigate to `chrome://extensions/`.
+2. Toggle on **Developer mode** in the top-right corner.
+3. Click **Load unpacked**.
+4. Select the `extension/` directory from this repository.
+5. Navigate to `http://127.0.0.1:5173/demo/order` to see the live SafeBite safety pill injected into the host page!
